@@ -1,27 +1,34 @@
+
+<?php 
+	include("function.php");
+    session_start();
+?>
+
+
 <?php
 
-if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password_check"]) && isset($_POST["birthday"]) ){
+if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password_check"]) && isset($_POST["birth"]) ){
 
-	if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password_check"]) || empty($_POST["birthday"]) ){
+	if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password_check"]) || empty($_POST["birth"]) ){
 		$_POST["incription_error"]=0;
     }
     
 
     else
     {
-		$currentdate=new DateTime("now");
-		$birthdate= new DateTime($_POST["birthday"]);
-        $user = new UserController();
+		$user = new UserController();
+		$current_date= new DateTime("now"); //date actuelle en php
+		$birth_date= new DateTime($_POST["birth"]);
         
-        if ($user->checkUsedPseudo($_POST["username"])!=0){
+        if ($user->checkSignPseudo($_POST["username"])==1){
 			$_POST["error_inscription"]=1;
         }
         
-		elseif ($user->checkUsedMail($_POST["email"])!=0){
+		elseif ($user->checkSignMail($_POST["email"])==1){
 			$_POST["error_inscription"]=2;
         }
         
-		elseif($birthdate>$currentdate ){
+		elseif($birth_date>$current_date ){
 			$_POST["error_inscription"]=3;
         }
         
@@ -31,14 +38,15 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
         
         else
         {
-			$user_id=$user->addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],$_POST["username"],$_POST["password"],$_POST["birthday"]);
-			$_SESSION["user_id"]=$user_id;
+			$user_id=$user->addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],$_POST["password"],$_POST["birthday"],$_POST["username"]);
+			$_SESSION["userid"]=$user_id;
 			$_SESSION["first_name"]=$_POST["firstname"];
 			$_SESSION["last_name"]=$_POST["lastname"];
 			$_SESSION["email"]=$_POST["email"];
-			$_SESSION["birth_date"]=$_POST["birthday"];
+			$_SESSION["birthday"]=$_POST["birth"];
 			$_SESSION["pseudo"]=$_POST["username"];
-			redirect('');
+			$_SESSION["password"]=$_POST["password"];
+			//redirect('');
 		}
 
 	}
@@ -110,8 +118,8 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                             </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="birthday"> Date de Naissance </label>
-                                <input class="form-control input-sm" type="date" name="birthday" onfocus="display_dateHelp()" onfocusout="hide_dateHelp()" placeholder="Date de Naissance" required>
+                                <label for="birth"> Date de Naissance </label>
+                                <input class="form-control input-sm" type="date" name="birth" onfocus="display_dateHelp()" onfocusout="hide_dateHelp()" placeholder="Date de Naissance" required>
 								<div class="invalid-feedback">
 									Veuillez rentrer votre date de naissance
 								</div>
@@ -148,6 +156,8 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 
 		<?php
 				if (isset($_POST["incription_error"])){
+					echo "<div class=\"alert alert-danger\" role=\"alert\" id=\"inscription-failed-msg\">";
+
                      switch ($_POST["error_inscription"])
                      {
 						case 0:
@@ -168,6 +178,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 						default:
 							echo "Une erreur est apparue pendant votre inscription, veuillez réessayer";
 							break;
+					
 					}
 					echo "</div>";
 			}

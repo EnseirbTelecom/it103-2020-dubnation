@@ -16,6 +16,7 @@ function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo)
   return $id_final;
 }
 
+
 //Fct qui check si l'email est déjà utilisée
 function checkSignMail($email){
   $con = con();
@@ -31,6 +32,7 @@ function checkSignMail($email){
   mysqli_close($con);
   return $UsedAlready;
 }
+
 
 
 //Fct qui check si le pseudo est déjà utilisé
