@@ -1,3 +1,9 @@
+<?php
+	include("function.php");
+    session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,7 +13,7 @@
 	<link rel="stylesheet" href="../it103/signup_css.css">
 
 
-<form method="post" action="login.php">
+<form method="post" action="verif.php">
 <title> Connexion </title>
 <p>
     Votre pseudo :<br />
@@ -16,36 +22,19 @@
     votre mot de passe :<br />
     <input id='password' type="password" name="password"/><br />
 
-    <input type="submit" value="Connexion"/><input type="button" onclick="deconnect()" value="Deconnexion"/>
+    <input type="submit" value="Connexion"/><a href="deconnect.php" target="_blank"> <input type="button" value="Déconnexion"> </a>
+
 
 </p>
+
+<p class="box-register">Vous êtes nouveau ici? <a href="signup.php">S'inscrire</a></p>
+
 
 
 </form>
 
-<?php
-if (isset($_POST['pseudo']) AND isset($_POST['password']))
-{
-    if ($_POST['pseudo'] != NULL AND $_POST['password'] != NULL)
-    {
 
-        $pseudo = $_POST['pseudo'];
-        $password = $_POST['password'];
-				$id=1;
-			}
-	}
-if (empty($_POST["pseudo"]) || empty($_POST["password"])){
-		echo "champs pas remplis";
-	}
-echo $id;
-?>
-<script>
-function deconnect(){
-	if ($id==1){
-		$id=0;
-	}
-}
-</script>
+
 
 
 </head></html>

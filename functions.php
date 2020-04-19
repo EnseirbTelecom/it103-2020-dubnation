@@ -50,4 +50,22 @@ function checkSignPseudo($pseudo){
     mysqli_close($con);
     return $UsedAlready;
 }
+//fct qui verifie la correspondance pseudo-mot de Passe
+function checkPassword($pseudo,$password){
+  $con=con();
+  $Requete = mysqli_query($mysqli,"SELECT hash FROM user WHERE username = '" . mysqli_real_escape_string($pseudo) . "'");
+  $result = mysqli_fetch_row($Requete);
 
+  if (!$result) {
+	   $error = "L'utilisateur est incorrect.";
+} else {
+	 $hash = $result[0];
+
+	if (password_verify($user_password, $hash)) {
+		// password ok
+	} else {
+		$error = "Le mot de passe est incorrect.";
+	}
+
+}
+}
