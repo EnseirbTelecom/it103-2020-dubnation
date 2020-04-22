@@ -1,6 +1,7 @@
 
 <?php 
 	include("function.php");
+	include("install.php");
     session_start();
 ?>
 
@@ -132,7 +133,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                             <div class="form-group row">
                                 <label for="password_check" class="col-sm-2 col-form-label"> Mot de passe à confirmer </label>
                                 <div class="col-sm-10">
-                                    <input type="password_check" class="form-control" id="password_check" placeholder="Mot de passe">
+                                    <input type="password" class="form-control" id="password_check" placeholder="Mot de passe">
                                 </div>
                             </div> 
                             <input class="btn btn-primary" type="submit" value="S'inscrire" id="submit">                            

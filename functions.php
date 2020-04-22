@@ -1,6 +1,6 @@
 <?php
 function con(){
-  $con = mysqli_connect('localhost', 'zac', 'password', 'debster');
+  $con = mysqli_connect('localhost', 'admin', 'it103', 'Dubnation');
   mysqli_set_charset($con, "utf8");
   return $con;
 }
@@ -24,13 +24,13 @@ function checkSignMail($email){
   mysqli_stmt_bind_param($stmt, 's', $email);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  $UsedAlready=0;
+  $MailUsedAlready=0;
   if(mysqli_num_rows($result)>0){
-      $UsedAlready=1;
+      $MailUsedAlready=1;
   }
   mysqli_free_result($result);
   mysqli_close($con);
-  return $UsedAlready;
+  return $MailUsedAlready;
 }
 
 
@@ -42,13 +42,13 @@ function checkSignPseudo($pseudo){
     mysqli_stmt_bind_param($stmt, 's', $pseudo);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    $UsedAlready=0;
+    $PseudoUsedAlready=0;
     if(mysqli_num_rows($result)>0){
-        $UsedAlready=1;
+        $PseudoUsedAlready=1;
     }
     mysqli_free_result($result);
     mysqli_close($con);
-    return $UsedAlready;
+    return $PseudoUsedAlready;
 }
 //fct qui verifie la correspondance pseudo-mot de Passe
 function checkPassword($pseudo,$password){
