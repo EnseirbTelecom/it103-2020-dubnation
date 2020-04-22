@@ -15,30 +15,21 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
     
 
     else
-    {
-		$user = new UserController();
-		$current_date= new DateTime("now"); //date actuelle en php
-		$birth_date= new DateTime($_POST["birth"]);
-        
-        if ($user->checkSignPseudo($_POST["username"])==1){
+    {   
+		$PseudoUsedAlready=checkSignPseudo($_POST["username"]);
+        if ($PseudoUsedAlready==1){
 			$_POST["error_inscription"]=1;
         }
-        
-		elseif ($user->checkSignMail($_POST["email"])==1){
+        $MailUsedAlready=checkSignMail($_POST["email"]);
+		if ($MailUsedAlready==1){
 			$_POST["error_inscription"]=2;
-        }
-        
-		elseif($birth_date>$current_date ){
+		}
+		if ($_POST["password"]!=$_POST["password_check"]){
 			$_POST["error_inscription"]=3;
         }
-        
-		elseif ($_POST["password"]!=$_POST["password_check"]){
-			$_POST["error_inscription"]=4;
-        }
-        
         else
         {
-			$user_id=$user->addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],$_POST["password"],$_POST["birthday"],$_POST["username"]);
+			$user_id=addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],crypt($_POST["password"]),$_POST["birthday"],$_POST["username"]);
 			$_SESSION["userid"]=$user_id;
 			$_SESSION["first_name"]=$_POST["firstname"];
 			$_SESSION["last_name"]=$_POST["lastname"];
@@ -46,7 +37,6 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 			$_SESSION["birthday"]=$_POST["birth"];
 			$_SESSION["pseudo"]=$_POST["username"];
 			$_SESSION["password"]=$_POST["password"];
-			//redirect('');
 		}
 
 	}
@@ -109,7 +99,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="email">@</span>
                                         </div>
-                                        <input type="email" id="email" class="form-control input-sm" placeholder="Email" required>
+                                        <input type="text" id="email" class="form-control input-sm" placeholder="Email" required>
                                         <div class="invalid-feedback">
                                             Veuillez rentrer votre email 
                                         </div>
@@ -119,7 +109,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="birth"> Date de Naissance </label>
-                                <input class="form-control input-sm" type="date" name="birth" onfocus="display_dateHelp()" onfocusout="hide_dateHelp()" placeholder="Date de Naissance" required>
+                                <input class="form-control input-sm" type="date" name="birth" placeholder="Date de Naissance" required>
 								<div class="invalid-feedback">
 									Veuillez rentrer votre date de naissance
 								</div>
@@ -127,9 +117,9 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="username"> Pseudo </label>
-                                <input type="username" class="form-control" id="username" placeholder="Pseudo">
-                                    <div class="invalid-feedback">
-										Ce pseudo est déjà utilisé
+                                <input type="text" class="form-control input-sm" id="username" placeholder="Pseudo">
+									<div class="invalid-feedback">
+										Veuillez choisir votre pseudo
 									</div>
                             </div>
                         </div>    
@@ -144,9 +134,6 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                                 <div class="col-sm-10">
                                     <input type="password_check" class="form-control" id="password_check" placeholder="Mot de passe">
                                 </div>
-                                <div class="invalid-feedback">
-									Erreur dans la confirmation du mot de passe
-								</div>
                             </div> 
                             <input class="btn btn-primary" type="submit" value="S'inscrire" id="submit">                            
 						</form>
@@ -157,7 +144,6 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 		<?php
 				if (isset($_POST["incription_error"])){
 					echo "<div class=\"alert alert-danger\" role=\"alert\" id=\"inscription-failed-msg\">";
-
                      switch ($_POST["error_inscription"])
                      {
 						case 0:
@@ -170,15 +156,11 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 							echo "Cette adresse mail est déjà utilisée";
 							break;
 						case 3:
-							echo "Date de naissance invalide";
-							break;
-						case 4:
 							echo "Mot de passe mal confirmé";
 							break;
 						default:
 							echo "Une erreur est apparue pendant votre inscription, veuillez réessayer";
 							break;
-					
 					}
 					echo "</div>";
 			}
@@ -189,12 +171,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
         </div>
         
         <script>
-			function display_dateHelp() {
-				document.getElementById("dateHelp").style.visibility = "visible";
-			}
-			function hide_dateHelp() {
-				document.getElementById("dateHelp").style.visibility = "hidden";
-			}
+			
 //source pour le script: https://www.pierre-giraud.com/bootstrap-apprendre-cours/formulaire/
 
 			(function() {
