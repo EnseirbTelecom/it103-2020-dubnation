@@ -46,7 +46,6 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
          <!-- Bootstrap CSS -->
@@ -99,7 +98,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="email">@</span>
                                         </div>
-                                        <input type="text" id="email" class="form-control input-sm" placeholder="Email" required>
+                                        <input type="text" class="form-control input-sm" placeholder="Email" required>
                                         <div class="invalid-feedback">
                                             Veuillez rentrer votre email 
                                         </div>
@@ -109,7 +108,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="birth"> Date de Naissance </label>
-                                <input class="form-control input-sm" type="date" name="birth" placeholder="Date de Naissance" required>
+                                <input class="form-control input-sm" type="date" name="birth">
 								<div class="invalid-feedback">
 									Veuillez rentrer votre date de naissance
 								</div>
@@ -132,7 +131,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                             <div class="form-group row">
                                 <label for="password_check" class="col-sm-2 col-form-label"> Mot de passe à confirmer </label>
                                 <div class="col-sm-10">
-                                    <input type="password_check" class="form-control" id="password_check" placeholder="Mot de passe">
+                                    <input type="password" class="form-control" id="password_check" placeholder="Mot de passe">
                                 </div>
                             </div> 
                             <input class="btn btn-primary" type="submit" value="S'inscrire" id="submit">                            
@@ -144,7 +143,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 		<?php
 				if (isset($_POST["incription_error"])){
 					echo "<div class=\"alert alert-danger\" role=\"alert\" id=\"inscription-failed-msg\">";
-                     switch ($_POST["error_inscription"])
+                    switch ($_POST["error_inscription"])
                      {
 						case 0:
 							echo "Vous n'avez pas rempli l'ensemble des champs";

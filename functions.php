@@ -9,7 +9,7 @@ function con(){
 function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo) {
   $con = con();
   $stmt = mysqli_prepare($con, "INSERT INTO user (first_name, last_name, email, password, birthday, pseudo) VALUES (?,?,?,?,?,?)");
-  mysqli_stmt_bind_param($stmt, 'ssss', $first_name, $last_name, $email, $password, $birthday, $pseudo);
+  mysqli_stmt_bind_param($stmt, 'ssssss', $first_name, $last_name, $email, $password, $birthday, $pseudo);
   mysqli_stmt_execute($stmt);
   $id_final = mysqli_insert_id($con);
   mysqli_close($con);
