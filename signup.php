@@ -1,6 +1,6 @@
 
 <?php 
-	include("function.php");
+	include("functions.php");
     session_start();
 ?>
 
