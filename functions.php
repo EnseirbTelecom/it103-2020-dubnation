@@ -1,6 +1,11 @@
 <?php
 function con(){
-  $con = mysqli_connect('localhost', 'admin', 'it103', 'Dubnation');
+  echo "test";
+  $con =  mysqli_connect('localhost', 'admin', 'it103','Dubnation');
+  echo $con;
+  if ($con){
+    echo " connexion au site";
+  }
   mysqli_set_charset($con, "utf8");
   return $con;
 }
@@ -53,22 +58,27 @@ function checkSignPseudo($pseudo){
     return $PseudoUsedAlready;
 }
 //fct qui verifie la correspondance pseudo-mot de Passe
-function checkPassword($pseudo,$password){
-  $con=con();
-  $Requete = mysqli_query($con,"SELECT * FROM user WHERE pseudo = $pseudo");
-  $result = mysqli_fetch_row($Requete);
-  while ($row = mysqli_fetch_row($Requete)) {
-        printf ("%s (%s)\n", $row[6], $row[7]);
-    }
+function checkPassword($pseudo,$password,$link){
+  $Requete = mysqli_query($link,"SELECT * FROM user WHERE pseudo = \"$pseudo\";");
+  // echo "SELECT * FROM user WHERE pseudo = \"$pseudo\";";
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  // var_dump($result);
+  // while ($row = mysqli_fetch_row($Requete)) {
+  //       printf ("%s (%s)\n", $row[0], $row[1]);
+  //   }
 
   if (!$result) {
-     echo "L'utilisateur est incorrect.";
-}
-  else {
-   $hash = $result[6];
+	   echo "L'utilisateur est incorrect.";
+} else {
+	 $hash = $result[0]["password"];
+   // echo $hash;
+   //echo $password;
 
-  if (password_verify($password, $hash)) {
-    echo "password ok";
-  } else {
-     echo "Le mot de passe est incorrect.";
-  }
+	if ($password == $hash) {
+		echo "password ok";
+	} else {
+		 echo "Le mot de passe est incorrect.";
+	}
+
+}
+}
