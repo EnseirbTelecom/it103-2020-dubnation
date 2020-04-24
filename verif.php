@@ -10,7 +10,6 @@ if (empty($_POST["pseudo"]) || empty($_POST["password"])){
 	}
 
 		elseif (isset($_POST["pseudo"]) && isset($_POST["password"])) {
-				 "salut moi c'est saucisse";
 				 $pseudo=$_POST["pseudo"];
 				 $password=$_POST["password"];
 				 echo $pseudo;
