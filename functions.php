@@ -7,12 +7,7 @@ function con(){
 
 //Fct qui ajoute un utilisateur après inscription
 function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo) {
-  $con = new mysqli('localhost', 'admin', 'it103', 'Dubnation');
-  /* Vérification de la connexion */
-  if (!$con) {
-    printf("Échec de la connexion : %s\n", mysqli_connect_error());
-  exit();
-}
+  $con = con();
   $stmt = mysqli_prepare($con, "INSERT INTO user (first_name, last_name, email, password, birthday, pseudo) VALUES (?,?,?,?,?,?)");
   mysqli_stmt_bind_param($stmt, 'ssssss', $first_name, $last_name, $email, $password, $birthday, $pseudo);
   mysqli_stmt_execute($stmt);
@@ -61,19 +56,26 @@ function checkSignPseudo($pseudo){
 function checkPassword($pseudo,$password){
   $con=con();
   $Requete = mysqli_query($mysqli,"SELECT hash FROM user WHERE username = '" . mysqli_real_escape_string($pseudo) . "'");
+  $Requete = mysqli_query($con,"SELECT * FROM user WHERE pseudo = $pseudo");
   $result = mysqli_fetch_row($Requete);
+  while ($row = mysqli_fetch_row($Requete)) {
+        printf ("%s (%s)\n", $row[0], $row[1]);
+    }
 
   if (!$result) {
-	   $error = "L'utilisateur est incorrect.";
+     $error = "L'utilisateur est incorrect.";
+     echo "L'utilisateur est incorrect.";
 } else {
-	 $hash = $result[0];
+   $hash = $result[0];
+   $hash = $result[6];
 
-	if (password_verify($user_password, $hash)) {
-		// password ok
-	} else {
-		$error = "Le mot de passe est incorrect.";
-	}
+  if (password_verify($user_password, $hash)) {
+    // password ok
+  if (password_verify($password, $hash)) {
+    echo "password ok";
+  } else {
+    $error = "Le mot de passe est incorrect.";
+     echo "Le mot de passe est incorrect.";
+  }
 
 }
-}
-?>
