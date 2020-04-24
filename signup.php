@@ -16,14 +16,14 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 
     else
     {   
-		$PseudoUsedAlready=checkSignPseudo($_POST["username"]);
-        if ($PseudoUsedAlready==1){
-			$_POST["error_inscription"]=1;
-        }
-        $MailUsedAlready=checkSignMail($_POST["email"]);
-		if ($MailUsedAlready==1){
-			$_POST["error_inscription"]=2;
-		}
+		//$PseudoUsedAlready=checkSignPseudo($_POST["username"]);
+        //if ($PseudoUsedAlready==1){
+		//	$_POST["error_inscription"]=1;
+        //}
+        //$MailUsedAlready=checkSignMail($_POST["email"]);
+		//if ($MailUsedAlready==1){
+		//	$_POST["error_inscription"]=2;
+		//}
 		if ($_POST["password"]!=$_POST["password_check"]){
 			$_POST["error_inscription"]=3;
         }
