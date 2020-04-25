@@ -4,45 +4,6 @@
     session_start();
 ?>
 
-
-<?php
-
-if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password_check"]) && isset($_POST["birth"]) ){
-
-	if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password_check"]) || empty($_POST["birth"]) ){
-		$_POST["incription_error"]=0;
-    }
-    
-
-    else
-    {   
-		//$PseudoUsedAlready=checkSignPseudo($_POST["username"]);
-        //if ($PseudoUsedAlready==1){
-		//	$_POST["error_inscription"]=1;
-        //}
-        //$MailUsedAlready=checkSignMail($_POST["email"]);
-		//if ($MailUsedAlready==1){
-		//	$_POST["error_inscription"]=2;
-		//}
-		if ($_POST["password"]!=$_POST["password_check"]){
-			$_POST["error_inscription"]=3;
-        }
-        else
-        {
-			$user_id=addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],crypt($_POST["password"]),$_POST["birthday"],$_POST["username"]);
-			$_SESSION["userid"]=$user_id;
-			$_SESSION["first_name"]=$_POST["firstname"];
-			$_SESSION["last_name"]=$_POST["lastname"];
-			$_SESSION["email"]=$_POST["email"];
-			$_SESSION["birthday"]=$_POST["birth"];
-			$_SESSION["pseudo"]=$_POST["username"];
-			$_SESSION["password"]=$_POST["password"];
-		}
-
-	}
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -70,11 +31,11 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 					<h2 class="panel-title">Inscris-toi sur Debster !</h2>
 				</div>
 					<div class="panel-body" id="debut">
-					<form role="form" method="post" class="needs-validation" novalidate>
+					<form method="post" action="verif_sign.php" >
                         <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="firstname"> Prénom </label>
-                                    <input type="text" id="firstname" class="form-control input-sm" placeholder="First name" required>
+                                    <input type="text" name="firstname" id="firstname" class="form-control input-sm" placeholder="First name" required>
                                     <div class="valid-feedback">
                                         Complétez l'ensemble des champs
                                     </div>
@@ -98,7 +59,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="email">@</span>
                                         </div>
-                                        <input type="text" class="form-control input-sm" placeholder="Email" required>
+                                        <input type="text" name ="email" class="form-control input-sm" placeholder="Email" required>
                                         <div class="invalid-feedback">
                                             Veuillez rentrer votre email 
                                         </div>
@@ -112,11 +73,10 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 								<div class="invalid-feedback">
 									Veuillez rentrer votre date de naissance
 								</div>
-								<div id="dateHelp" class="form-text text-muted HelpForm"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="username"> Pseudo </label>
-                                <input type="text" class="form-control input-sm" id="username" placeholder="Pseudo">
+                                <input type="text" name="username" class="form-control input-sm" id="username" placeholder="Pseudo">
 									<div class="invalid-feedback">
 										Veuillez choisir votre pseudo
 									</div>
@@ -125,45 +85,20 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                             <div class="form-group row">
                                 <label for="password" class="col-sm-2 col-form-label"> Mot de Passe </label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="password" placeholder="Mot de passe">
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
                                 </div>
                             </div>    
                             <div class="form-group row">
                                 <label for="password_check" class="col-sm-2 col-form-label"> Mot de passe à confirmer </label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="password_check" placeholder="Mot de passe">
+                                    <input type="password" name="password_check" class="form-control" id="password_check" placeholder="Mot de passe">
                                 </div>
                             </div> 
-                            <input class="btn btn-primary" type="submit" value="S'inscrire" id="submit">                            
+                            <input type="submit" value="S'inscrire" id="submit">                            
 						</form>
 						</div>
 					</div>
 				</div>
-
-		<?php
-				if (isset($_POST["incription_error"])){
-					echo "<div class=\"alert alert-danger\" role=\"alert\" id=\"inscription-failed-msg\">";
-                    switch ($_POST["error_inscription"])
-                     {
-						case 0:
-							echo "Vous n'avez pas rempli l'ensemble des champs";
-							break;
-						case 1:
-							echo "Ce pseudo est déjà utilisé";
-							break;
-						case 2:
-							echo "Cette adresse mail est déjà utilisée";
-							break;
-						case 3:
-							echo "Mot de passe mal confirmé";
-							break;
-						default:
-							echo "Une erreur est apparue pendant votre inscription, veuillez réessayer";
-							break;
-					}
-					echo "</div>";
-			}
-            ?>
             
 
 			</div>

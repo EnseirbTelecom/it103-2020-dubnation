@@ -11,9 +11,8 @@ function con(){
 }
 
 //Fct qui ajoute un utilisateur après inscription
-function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo) {
-  $con = con();
-  $stmt = mysqli_prepare($con, "INSERT INTO user (first_name, last_name, email, password, birthday, pseudo) VALUES (?,?,?,?,?,?)");
+function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo,$link) {
+  $stmt = mysqli_prepare($link, "INSERT INTO user (first_name, last_name, email, password, birthday, pseudo) VALUES (?,?,?,?,?,?)");
   mysqli_stmt_bind_param($stmt, 'ssssss', $first_name, $last_name, $email, $password, $birthday, $pseudo);
   mysqli_stmt_execute($stmt);
   printf("%d ligne insérée.\n", mysqli_stmt_affected_rows($stmt));
@@ -25,38 +24,36 @@ function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo)
 
 
 //Fct qui check si l'email est déjà utilisée
-function checkSignMail($email){
-  $con = con();
-  $stmt = mysqli_prepare($con, "SELECT * FROM user WHERE email = ?");
-  mysqli_stmt_bind_param($stmt, 's', $email);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  $MailUsedAlready=0;
-  if(mysqli_num_rows($result)>0){
-      $MailUsedAlready=1;
+function checkSignMail($email,$link){
+  $Requete = mysqli_query($link,"SELECT * FROM user WHERE email = \"$email\";");
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  if (!$result) {
+    echo "Email Validé";
   }
-  mysqli_free_result($result);
-  mysqli_close($con);
-  return $MailUsedAlready;
+  else{
+    echo "Email déjà utilisé, veuillez-le changer";
+  }
+    
 }
+
 
 
 
 //Fct qui check si le pseudo est déjà utilisé
-function checkSignPseudo($pseudo){
-    $con = con();
-    $stmt = mysqli_prepare($con, "SELECT * FROM user WHERE pseudo = ?");
-    mysqli_stmt_bind_param($stmt, 's', $pseudo);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $PseudoUsedAlready=0;
-    if(mysqli_num_rows($result)>0){
-        $PseudoUsedAlready=1;
-    }
-    mysqli_free_result($result);
-    mysqli_close($con);
-    return $PseudoUsedAlready;
+function checkSignPseudo($pseudo,$link){
+  $Requete = mysqli_query($link,"SELECT * FROM user WHERE pseudo = \"$pseudo\";");
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  if (!$result) {
+    echo "Pseudo Validé";
+  }
+  else{
+    echo "Pseudo déjà utilisé, veuillez-le changer";
+  }
+    
 }
+
+
+
 //fct qui verifie la correspondance pseudo-mot de Passe
 function checkPassword($pseudo,$password,$link){
   $Requete = mysqli_query($link,"SELECT * FROM user WHERE pseudo = \"$pseudo\";");
