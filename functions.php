@@ -74,9 +74,10 @@ function checkPassword($pseudo,$password,$link){
    //echo $password;
 
 	if ($password == $hash) {
-		echo "password ok";
+		echo "Connexion réussie";
 	} else {
-		echo "Le mot de passe est incorrect.";
+    echo "Le mot de passe est incorrect.";
+    exit();
 	}
 
 }

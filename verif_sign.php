@@ -21,6 +21,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 		echo 'L INSCRIPTION A ÉCHOUÉ: Tous les champs ne sont pas remplis ';
     }
     $condition=0;
+
         if (empty($_POST["username"])){
             echo 'Remplissez le champ Pseudo ';
         }
@@ -39,8 +40,9 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
             echo $condition;
             }
 		
-    	if ($_POST["password"]!=$_POST["password_check"] || empty($_POST["password"])){
-             echo 'ERREUR: Merci de bien confirmer votre mot de passe ';
+    	if ($_POST["password"]!=$_POST["password_check"] || empty($_POST["password"]) || strlen($_POST["firstname"])<2 || strlen($_POST["lastname"])<2){
+            echo 'Vos prénoms et noms ont-ils plus de deux caractères ?';
+            echo 'ERREUR: Merci de bien confirmer votre mot de passe ';
         }
         else{
             $condition+=1;
