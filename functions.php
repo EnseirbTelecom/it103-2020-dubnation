@@ -32,6 +32,7 @@ function checkSignMail($email,$link){
   }
   else{
     echo "Email déjà utilisé, veuillez-le changer";
+    exit();
   }
     
 }
@@ -48,6 +49,7 @@ function checkSignPseudo($pseudo,$link){
   }
   else{
     echo "Pseudo déjà utilisé, veuillez-le changer";
+    exit();
   }
     
 }
@@ -74,7 +76,7 @@ function checkPassword($pseudo,$password,$link){
 	if ($password == $hash) {
 		echo "password ok";
 	} else {
-		 echo "Le mot de passe est incorrect.";
+		echo "Le mot de passe est incorrect.";
 	}
 
 }
