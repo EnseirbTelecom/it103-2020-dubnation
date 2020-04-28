@@ -1,0 +1,48 @@
+h2{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 0;
+    margin-top: 0;
+    line-height: 40px;
+    color: coral;
+}
+
+h1{
+    color: brown;
+    background-color: lavender;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-width: 2px;
+    border-color: orangered;
+    border-style: outset;
+    text-align: center;
+}
+
+#debut{
+    color:purple;
+    text-align: center;
+    font-weight: 700;
+    font-size: larger;
+}
+
+body{
+    background-color: wheat;
+}
+
+#exigence{
+    font-style: italic;
+}
+
+#debut{
+    background-color: lavender;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-width: 2px;
+    border-color: orangered;
+    border-style: outset;
+}

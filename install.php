@@ -18,24 +18,24 @@ $qTbUsers = "CREATE TABLE IF NOT EXISTS `user` (
     
    
   $insertUsers = "INSERT INTO `user` (`userid`, `first_name`,`last_name`,`email`, `password`, `birthday`,`pseudo`) VALUES
-  (1, 'Jean','Nowo','jnowo@gmail.com', 'Bordeaux13', '1999-03-10','jnowo'),
-  (2, 'Marie','Lala','mlala@gmail.com', 'MarieParis', '1990-01-22','mlala'),
-    (3, 'Pierre','Christophe','pc@gmail.com', 'Toulon83', '2004-09-15','rct83');";
+  (1, 'Jean','Nowomansky','jnowo@gmail.com', 'Bordeaux13', '1999-03-10','Jnowomanski'),
+  (2, 'Marie','Mallard','mlala@gmail.com', 'MarieParis', '1990-01-22','Mmallard'),
+  (3, 'Pierre','Christophe','pc@gmail.com', 'Toulon83', '2004-09-15','PilouRCT');";
 
 
 
 
 $qTbFriends = "CREATE TABLE IF NOT EXISTS `Reach_my_friend`(
-    `current_user_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `id_friend_user` int(20) UNSIGNED NOT NULL ,
-    `status` enum('accepted','pending','blocked') COLLATE ascii_bin NOT NULL DEFAULT 'pending',
-    FOREIGN KEY (current_user_id) REFERENCES user (userid),
-    FOREIGN KEY (id_friend_user) REFERENCES user (userid)
+    `id_username_1` int(20) UNSIGNED NOT NULL ,
+    `id_username_2` int(20) UNSIGNED NOT NULL ,
+    FOREIGN KEY (id_username_1) REFERENCES user (userid),
+    FOREIGN KEY (id_username_2) REFERENCES user (userid)
     );";
 
-$insertFriends = "INSERT INTO `Reach_my_friend` (`current_user_id`,`id_friend_user`,`status`) VALUES
-  (1, 2, 'accepted'),
-  (2, 3, 'accepted');";
+$insertFriends = "INSERT INTO `Reach_my_friend` (`id_username_1`,`id_username_2`) VALUES
+  (1, 2),
+  (1, 3),
+  (2, 3);";
 
 $qTbTransaction = "CREATE TABLE IF NOT EXISTS `Transaction_Ami`(
     `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,

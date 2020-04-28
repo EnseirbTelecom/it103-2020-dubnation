@@ -7,7 +7,7 @@
 
 $link = mysqli_connect('localhost', 'admin', 'it103','Dubnation');
 if (!$link) {
-		echo "ca marche po";
+		echo "Probleme de connexion";
 		die('Could not connect: ' . mysqli_error());
 }
 echo 'Connected successfully ';

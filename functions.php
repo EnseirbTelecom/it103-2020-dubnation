@@ -18,7 +18,7 @@ function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo,
   printf("%d ligne insérée.\n", mysqli_stmt_affected_rows($stmt));
   printf("Erreur : %s.\n", mysqli_stmt_error($stmt));
   $id_final = mysqli_insert_id($con);
-  mysqli_close($con);
+  mysqli_close($link);
   return $id_final;
 }
 
@@ -81,4 +81,12 @@ function checkPassword($pseudo,$password,$link){
 	}
 
 }
+}
+
+
+//fct qui ajoute une relation d'amitié
+function addfriendship($id_user,$id_friend,$link){
+  $Requete = mysqli_query($link,"INSERT INTO Reach_my_friend (id_username_1, id_username_2) VALUES ($id_user,$id_friend)");
+  mysqli_close($link);
+
 }
