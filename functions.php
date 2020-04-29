@@ -17,7 +17,7 @@ function addUser($first_name, $last_name, $email, $password, $birthday, $pseudo,
   mysqli_stmt_execute($stmt);
   printf("%d ligne insérée.\n", mysqli_stmt_affected_rows($stmt));
   printf("Erreur : %s.\n", mysqli_stmt_error($stmt));
-  $id_final = mysqli_insert_id($con);
+  $id_final = mysqli_insert_id($link);
   mysqli_close($link);
   return $id_final;
 }
@@ -86,7 +86,19 @@ function checkPassword($pseudo,$password,$link){
 
 //fct qui ajoute une relation d'amitié
 function addfriendship($id_user,$id_friend,$link){
-  $Requete = mysqli_query($link,"INSERT INTO Reach_my_friend (id_username_1, id_username_2) VALUES ($id_user,$id_friend)");
+  $stmt = mysqli_prepare($link, "INSERT INTO Reach_my_friend (id_username_1, id_username_2) VALUES (?,?)");
+  mysqli_stmt_bind_param($stmt, 'ii', $id_user,$id_friend);
+  mysqli_stmt_execute($stmt);
+  printf("%d ligne insérée.\n", mysqli_stmt_affected_rows($stmt));
+  printf("Erreur : %s.\n", mysqli_stmt_error($stmt));
   mysqli_close($link);
+}
 
+//fct qui supprime une relation d'amitié
+function delete_friendship($id_user,$id_friend,$link){
+  echo "zac";
+  $Requete = mysqli_query($link, "DELETE FROM Reach_my_friend  WHERE id_username_1 = \"$id_user\" AND id_username_2 = \"$id_friend\" OR id_username_1 = \"$id_friend\" AND id_username_2 = \"$id_user\" ;");
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  var_dump($result);
+  mysqli_close($link);
 }

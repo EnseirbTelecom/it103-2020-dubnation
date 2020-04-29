@@ -1,10 +1,9 @@
 <?php
 session_start();
 session_destroy();
-$titre="Déconnexion";
 include("index.php");
 include("login.php");
-}
+
 
 
   // Détruire la session.

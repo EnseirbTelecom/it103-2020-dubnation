@@ -24,8 +24,8 @@ h1{
 #debut{
     color:purple;
     text-align: center;
-    font-weight: 700;
-    font-size: larger;
+    font-weight: 500;
+    font-size: x-small;
 }
 
 body{
@@ -45,4 +45,18 @@ body{
     border-width: 2px;
     border-color: orangered;
     border-style: outset;
+}
+
+#submit{
+    background-color:hotpink;
+    color: greenyellow;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#ajout{
+    color: indianred;
+    font-weight: 600;
+    padding-left: 20px;
 }

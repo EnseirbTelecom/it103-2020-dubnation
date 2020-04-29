@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include("functions.php");
 ?>    
 
 <?php
@@ -35,13 +36,6 @@ if ($_SESSION["pseudo"]){
     $user_check[]=$_SESSION["pseudo"];
     //var_dump($user_check);
 }
-
-
-
-
-
-
-
 
 
 ?>
@@ -81,7 +75,7 @@ if ($_SESSION["pseudo"]){
                     echo $result_2[0]["last_name"]; echo '&nbsp';
                     echo $result_2[0]["first_name"]; echo '&nbsp';
                     $user_check[]=$result_2[0]["pseudo"]; ?>
-                    <div id="exigence"> <?php echo $result_2[0]["pseudo"];echo "<br/>"; ?> 
+                    <div id="exigence"> <?php echo"Pseudo:"?> <?php echo $result_2[0]["pseudo"];echo "<br/>"; ?> </div>
                 <?php
                 }
                 if ($result_1[$i]["id_username_2"] == $_SESSION["userid"]) {
@@ -92,13 +86,27 @@ if ($_SESSION["pseudo"]){
                     echo $result_3[0]["last_name"]; echo '&nbsp';
                     echo $result_3[0]["first_name"]; echo '&nbsp';
                     $user_check[]=$result_3[0]["pseudo"];?>
-                    <div id="exigence"> <?php echo $result_3[0]["pseudo"];echo "<br/>"; ?> </div>  
+                    <div id="exigence"> <?php echo"Pseudo:"?> <?php echo $result_3[0]["pseudo"];echo "<br/>"; ?> </div>  
                     <?php                 
                 }
             }
+            
         ?>
         </div>
-
+    
+        <div class="panel-body">
+			<form method="post" action="delete_friends.php" >
+                <div class="form-row">
+                    <div class="col-md-4 mb-3" id="ajout">
+                        <label for="friends_deleted"> Supprimer un ami </label>
+                        <input type="text" name="friends_deleted" id="friends_deleted" class="form-control input-sm" placeholder="Pseudo" required>
+                    </div>
+                    </div>
+                    <input class="btn btn-primary btn-sm" type="submit" value="Supprimer" id="submit"> 
+                
+        </form> 
+        </div>  
+        
         
         <h2> Autres utilisateurs </h2>
         <div id="debut">
@@ -111,23 +119,26 @@ if ($_SESSION["pseudo"]){
         for ($i=0; $i < sizeof($result_4); $i++) { 
             if (!in_array($result_4[$i]["pseudo"],$user_check)) {
                 echo $result_4[$i]["pseudo"]; 
-                echo $result_4[$i]["userid"];
+                //echo $result_4[$i]["userid"];
                 
                 
             }
             echo "<br/>";    
         }
-        
-
-
-
-
-
-
-
-
     ?>
 
     </div>
+    <div class="panel-body">
+			<form method="post" action="add_friends.php" >
+                <div class="form-row">
+                    <div class="col-md-4 mb-3" id="ajout">
+                        <label for="friends_name"> Ajouter un ami </label>
+                        <input type="text" name="friends_name" id="friends_name" class="form-control input-sm" placeholder="Pseudo" required>
+                    </div>
+                    </div>
+                    <input class="btn btn-primary btn-sm" type="submit" value="Ajouter" id="submit"> 
+                
+    </form> 
+    </div>   
     </body>
     </html>

@@ -39,6 +39,7 @@
 
     <!--connexion_inscription-->
     <div class="col">
+      <button type="button" class="btn btn-dark" id="liens"><a href='deconnect.php'>Déconnexion</a></button>
       <button type="button" class="btn btn-dark" id="liens"><a href='carnet_amis.php'>Gestion d'amis</a></button>
       <div class="dropdown">
         <div class="btn-group">
