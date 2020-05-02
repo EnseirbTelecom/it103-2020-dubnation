@@ -1,6 +1,6 @@
 <?php 
 	include("functions.php");
-    session_start();
+  session_start();
 ?>
 
 
@@ -49,8 +49,8 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="menu">
             <a class="dropdown-item" href="transaction_ami.php">Transaction simple</a>
-            <a class="dropdown-item" href="transaction_groupe.php">Transaction vers un Groupe</a>
-            <a class="dropdown-item" href="historique.php">Historique des comptes</a>
+            <a class="dropdown-item" href="inter_transaction_groupe.php">Transaction vers un Groupe</a>
+            <a class="dropdown-item" href="inter_historique.php">Historique des comptes</a>
           </div>
         </div>
       </div>
