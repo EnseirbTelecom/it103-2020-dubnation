@@ -23,21 +23,15 @@
 
 <body>
 
-  <!--banner-->
   <div class="banner">
     <div class="row align-items-center">
 
-    <!--website_name-->
     <div class="col" id='Topright'>BIENVENUE SUR TON DEBSTER: <?php echo $_SESSION["pseudo"] ?></div>
-    <!--end_website_name-->
 
-    <!--logo-->
     <div class="col" id='Topmiddle'>
       <img src="img/Screenshot from 2020-04-09 13-15-47.png" class="imag_small" alt="Logo" />
     </div>
-    <!--end_logo-->
 
-    <!--connexion_inscription-->
     <div class="col">
       <button type="button" class="btn btn-dark" id="liens"><a href='deconnect.php'>Déconnexion</a></button>
       <button type="button" class="btn btn-dark" id="liens"><a href='carnet_amis.php'>Gestion d'amis</a></button>
@@ -55,10 +49,9 @@
         </div>
       </div>
     </div>
-    <!--end connexion_inscription-->
 
    </div>
   </div>
-  <!--end_banner-->
+
 </body>
 </html>
