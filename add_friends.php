@@ -30,6 +30,9 @@ $user_con = $result[0]["userid"];
 $Requete_1 = mysqli_query($link,"SELECT * FROM Reach_my_friend WHERE id_username_1 = \"$user_con\" OR id_username_2 = \"$user_con\";");
 $result_1 = mysqli_fetch_all($Requete_1, MYSQLI_ASSOC);
 //var_dump($result_1);
+$Requete_5 = mysqli_query($link, "SELECT pseudo FROM user");
+$result_5 = mysqli_fetch_all($Requete_5, MYSQLI_ASSOC);
+$user_global[] = $_SESSION["pseudo"];
 
                             /////////////
 
@@ -63,6 +66,16 @@ if (isset($_POST["friends_name"])){
             $user_check[]=$result_3[0]["pseudo"];                 
         }
     }
+
+    for ($i=1; $i <sizeof($result_5) ; $i++) { 
+            $user_global[]=$result_5[$i]["pseudo"];
+    }
+    //var_dump($user_global);
+    if (!in_array($_POST["friends_name"],$user_global)){
+        echo "Cet utilisateur n'existe pas sur Debster";
+        exit();
+    }    
+    
     //var_dump($user_check);
     if (in_array($_POST["friends_name"],$user_check)) {
         echo "C'est déjà votre ami !";
@@ -75,6 +88,7 @@ if (isset($_POST["friends_name"])){
         echo $result_final[0]["userid"];
         if ($condition == 1 ){
             addfriendship($_SESSION["userid"],$result_final[0]["userid"],$link);
+            echo "Ajout réussi";
         }
     }
 }
