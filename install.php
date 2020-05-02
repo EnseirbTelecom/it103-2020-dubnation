@@ -50,6 +50,15 @@ $qTbTransaction = "CREATE TABLE IF NOT EXISTS `Transaction_Ami`(
     FOREIGN KEY (id_user_waiting) REFERENCES user (userid)
   );";
 
+$insertTransactions = "INSERT INTO `Transaction_Ami` (`id`, `id_user_dept`, `id_user_waiting`, `status`, `date`, `contexte`, `sum`) VALUES
+  (1, 1, 2, 'opened', '2020-01-02', 'Vodka à Varsovie', 21),
+  (2, 1, 2, 'opened', '2020-04-04', 'Kangourou à Sydney', 15),
+  (3, 1, 2, 'closed', '2018-01-07', 'Pool-Party bebeww', 100),
+  (4, 1, 2, 'canceled', '2019-09-08', 'Vins rouges de Bordeaux', 50),
+  (5, 2, 1, 'opened', '2020-05-06', 'Avions pour Malte', 75),
+  (6, 2, 3, 'closed', '2020-08-03', 'Turn-up à Cannes', 150);";
+  
+
 echo "Connexion au serveur MySQL.";
     
 $con = mysqli_connect('localhost', 'admin', 'it103');
@@ -90,6 +99,11 @@ echo mysqli_error($con);
 
 echo "Création de la table Transactions.";
 mysqli_query($con, $qTbTransaction);
+echo mysqli_info($con);
+echo mysqli_error($con);
+
+echo "insert Transactions";
+mysqli_query($con, $insertTransactions);
 echo mysqli_info($con);
 echo mysqli_error($con);
 
