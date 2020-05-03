@@ -87,11 +87,12 @@ if ($_SESSION["pseudo"]){
                         echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
                         echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';
                         $creance += $result1[$i]["sum"];
-                }?>
-        </div><?php
+                }
         echo "<br/>";
     }
     }
+    ?>
+    </div> <?php
     $encours = $dette+$creance;
     ?>
     <div id="encours"><?php
