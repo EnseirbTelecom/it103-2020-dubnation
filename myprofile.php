@@ -45,6 +45,8 @@
             <a class="dropdown-item" href="transaction_ami.php">Transaction simple</a>
             <a class="dropdown-item" href="inter_transaction_groupe.php">Transaction vers un Groupe</a>
             <a class="dropdown-item" href="inter_historique.php">Historique des comptes</a>
+            <a class="dropdown-item" href="dette_creance.php">Consultation des dettes et créances </a>
+
           </div>
         </div>
       </div>
