@@ -80,7 +80,9 @@ if (isset($_POST['Message_Explicatif']) && isset($_POST['Utilisateur_Source']) &
 }
 
 else{
-include 'ami.php' ;
-echo 'Saisir les données' ;
-
+include ami.php;
+echo 'Saisir les données';
 }
+
+?>
+
