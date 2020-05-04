@@ -82,8 +82,8 @@
                          <label for="Statut">Statut</label>
                          <select class="form-group" id="Statut" name="Statut">
                              <option value="Ouvert">Ouvert</option>
-                             <option value="Remboursée">Remboursée</option>
-                             <option value="Annulée">Annulée</option>
+                             <option value="Remboursée">Remboursé</option>
+                             <option value="Annulée">Annulé</option>
                          </select>
                          <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
