@@ -41,7 +41,7 @@ $qTbTransaction = "CREATE TABLE IF NOT EXISTS `Transaction_Ami`(
     `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_user_dept` int(20) UNSIGNED  NOT NULL,
     `id_user_waiting` int(20) UNSIGNED NOT NULL,
-    `status` enum('opened','closed','canceled') COLLATE ascii_bin NOT NULL DEFAULT 'opened',
+    `statut` enum('opened','closed','canceled') COLLATE ascii_bin NOT NULL DEFAULT 'opened',
     `date_de_creation` date NOT NULL,
     `message_explicatif` varchar(256) DEFAULT NULL,
     `date_de_fermeture` date NOT NULL,
