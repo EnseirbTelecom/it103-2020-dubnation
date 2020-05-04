@@ -47,15 +47,16 @@
       <div class="container">
              <h1 id='title'>Transaction Simple</h1>
              <form class="needs-validation" novalidate>
+               <form action="transaction_ami.php" method="post">
                      <div class="form-row">
                          <label for="utilisateur source">Utilisateur source</label>
-                         <input type="text" class="form-control" id="pseudo" placeholder="Pierre" required>
+                         <input type="text" class="form-control" id="utilisateur-source" placeholder="Pierre" required>
                          <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                      </div>
                      <div class="form-row">
                          <label for="Utilisteur cible">Utilisateur cible</label>
-                         <input type="text" class="form-control" id="pseudo" placeholder="Marie" required>
+                         <input type="text" class="form-control" id="utilisateur_cible" placeholder="Marie" required>
                          <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                      </div>
@@ -79,7 +80,11 @@
                      </div>
                      <div class="form-row">
                          <label for="Statut">Statut</label>
-                         <input type="text" class="form-control" id="statut" placeholder="ouvert" required>
+                         <select class="form-group" id="Statut" name="Statut">
+                             <option value="Ouvert">Ouvert</option>
+                             <option value="Remboursée">Remboursée</option>
+                             <option value="Annulée">Annulée</option>
+                         </select>
                          <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                      </div>
