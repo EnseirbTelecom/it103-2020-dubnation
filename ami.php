@@ -100,6 +100,7 @@
                          <div class="valid-feedback">Ok !</div>
                          <div class="invalid-feedback">Valeur incorrecte</div>
                      </div>
+                 </form>
 
                  <button class="btn btn-primary" type="submit" id="payer">Payer</button>
              </form>
