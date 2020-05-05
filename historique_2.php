@@ -73,19 +73,19 @@ if (!(in_array($_POST["friends_transaction_alive"],$user_check))) {
 }
 else{
     // Toutes les transaction ou le user est concerné
-    $requete_1 = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE  id_user_dept = \"$user_con\" OR id_user_waiting = \"$user_con\" ORDER BY date DESC;");
+    $requete_1 = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE  id_user_dept = \"$user_con\" OR id_user_waiting = \"$user_con\" ORDER BY date_de_creation DESC;");
     $result1 = mysqli_fetch_all($requete_1, MYSQLI_ASSOC);
     //echo $result1[4]["id_user_waiting"];
     //var_dump($result1);
     //echo $user_con;
     $id_friends_transaction = $result0[0]["userid"];
     for ($i=0; $i <sizeof($result1) ; $i++) { 
-        if ($result1[$i]["status"] == 'opened') {?>
+        if ($result1[$i]["statut"] == 'opened') {?>
             <div>
             <?php
             if ($result1[$i]["id_user_dept"] == $user_con && $result1[$i]["id_user_waiting"] == $id_friends_transaction) {
-                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
-                echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["contexte"]; echo '&nbsp';
+                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp'; 
+                echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_waiting"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
                 $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
@@ -95,7 +95,7 @@ else{
                 echo "<br/>";
             }
             if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
-                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
+                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp'; 
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["contexte"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_dept"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");

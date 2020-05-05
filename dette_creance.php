@@ -56,10 +56,10 @@ if ($_SESSION["pseudo"]){
         <div id="exigence1"><?php
     $dette = 0;    
     for ($i=0; $i <sizeof($result1) ; $i++) { 
-        if ($result1[$i]["status"] == 'opened') {
+        if ($result1[$i]["statut"] == 'opened') {
             if ($result1[$i]["id_user_dept"] == $user_con) {
-                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
-                echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["contexte"]; echo '&nbsp';
+                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp'; 
+                echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_waiting"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
                 $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
@@ -76,10 +76,10 @@ if ($_SESSION["pseudo"]){
             <?php
             $creance = 0;
             for ($i=0; $i <sizeof($result1) ; $i++) { 
-                if ($result1[$i]["status"] == 'opened') {
+                if ($result1[$i]["statut"] == 'opened') {
                     if ($result1[$i]["id_user_waiting"] == $user_con) {
-                        echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
-                        echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["contexte"]; echo '&nbsp';
+                        echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp'; 
+                        echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                         $useridfriend = $result1[$i]["id_user_dept"];
                         $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
                         $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);

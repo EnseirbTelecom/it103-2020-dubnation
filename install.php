@@ -45,20 +45,20 @@ $qTbTransaction = "CREATE TABLE IF NOT EXISTS `Transaction_Ami`(
     `date_de_creation` date NOT NULL,
     `message_explicatif` varchar(256) DEFAULT NULL,
     `date_de_fermeture` date NOT NULL,
-    'message_de_fermeture' varchar(256) DEFAULT NULL,
+    `message_de_fermeture` varchar(256) DEFAULT NULL,
     `sum` int(20) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_user_dept) REFERENCES user (userid),
     FOREIGN KEY (id_user_waiting) REFERENCES user (userid)
   );";
 
-$insertTransactions = "INSERT INTO `Transaction_Ami` (`id`, `id_user_dept`, `id_user_waiting`, `status`, `date`, `contexte`, `sum`) VALUES
-  (1, 1, 2, 'opened', '2020-01-02', 'Vodka à Varsovie', 21),
-  (2, 1, 2, 'opened', '2020-04-04', 'Kangourou à Sydney', 15),
-  (3, 1, 2, 'closed', '2018-01-07', 'Pool-Party bebeww', 100),
-  (4, 1, 2, 'canceled', '2019-09-08', 'Vins rouges de Bordeaux', 50),
-  (5, 2, 1, 'opened', '2020-05-06', 'Avions pour Malte', 75),
-  (6, 2, 3, 'closed', '2020-08-03', 'Turn-up à Cannes', 150);";
+$insertTransactions = "INSERT INTO `Transaction_Ami` (`id`, `id_user_dept`, `id_user_waiting`, `statut`, `date_de_creation`,`message_explicatif`,`date_de_fermeture`,`message_de_fermeture`, `sum`) VALUES
+  (1, 1, 2, 'opened', '2020-01-02', 'Vodka à Varsovie','2020-02-03','Merci pour le remboursement', 21),
+  (2, 1, 2, 'opened', '2020-04-04', 'Kangourou à Sydney','2020-05-05','Merci pour le remboursement', 15),
+  (3, 1, 2, 'closed', '2018-01-07', 'Pool-Party bebeww','2020-08-02','Merci pour le remboursement', 100),
+  (4, 1, 2, 'canceled', '2019-09-08', 'Vins rouges de Bordeaux','2020-01-05','Merci pour le remboursement', 50),
+  (5, 2, 1, 'opened', '2020-05-06', 'Avions pour Malte','2020-06-07','Merci pour le remboursement', 75),
+  (6, 2, 3, 'closed', '2020-08-03', 'Turn-up à Cannes','2020-09-09','Merci pour le remboursement', 150);";
   
 
 echo "Connexion au serveur MySQL.";
