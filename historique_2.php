@@ -12,7 +12,7 @@ if (!$link) {
 echo 'Connected successfully ';
 echo "<br/>";
 
-$friends_transaction = $_POST["friends_transaction"];
+$friends_transaction = $_POST["friends_transaction_alive"];
 $requete0 = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$friends_transaction\";");
 $result0 = mysqli_fetch_all($requete0, MYSQLI_ASSOC);
 
@@ -48,9 +48,7 @@ if ($_SESSION["pseudo"]){
 </head>
 
 <body>
-    <h1> Voici l'historique des transactions </h1>
-    <h4> Les transactions réglées sont grisées, les autres constituent le solde </h4>
-
+<h1> Voici seulement les transactions en cours </h1>
 
 <?php
 
@@ -70,7 +68,7 @@ for ($i=0; $i<sizeof($result_1) ; $i++) {
     }
 }
 
-if (!(in_array($_POST["friends_transaction"],$user_check))) {
+if (!(in_array($_POST["friends_transaction_alive"],$user_check))) {
     echo "Le peudo rentré n'est pas votre ami";
 }
 else{
@@ -82,8 +80,8 @@ else{
     //echo $user_con;
     $id_friends_transaction = $result0[0]["userid"];
     for ($i=0; $i <sizeof($result1) ; $i++) { 
-        if ($result1[$i]["status"] != 'opened') {?>
-            <div id="exigence">
+        if ($result1[$i]["status"] == 'opened') {?>
+            <div>
             <?php
             if ($result1[$i]["id_user_dept"] == $user_con && $result1[$i]["id_user_waiting"] == $id_friends_transaction) {
                 echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
@@ -105,46 +103,11 @@ else{
                 //var_dump($result2);
                 echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
                 ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
-            }?>
-    </div><?php
-        echo "<br/>";
-    }
-        else{
-            if ($result1[$i]["id_user_dept"] == $user_con && $result1[$i]["id_user_waiting"] == $id_friends_transaction) {
-                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
-                echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["contexte"]; echo '&nbsp';
-                $useridfriend = $result1[$i]["id_user_waiting"];
-                $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
-                $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
-                echo "DONC:"; echo '&nbsp'; echo "Tu dois:"; echo '&nbsp';
-                ?> <div id="Red"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
-                echo "à"; echo '&nbsp';echo $result2[0]["pseudo"]; 
-                echo "<br/>";
             }
-            if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
-                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date"]; echo '&nbsp'; 
-                echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["contexte"]; echo '&nbsp';
-                $useridfriend = $result1[$i]["id_user_dept"];
-                $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
-                $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
-                //var_dump($result2);
-                echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
-                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
-            }
-
         }
     }
-    }
-
-
-
-
-
-
-
+}
 ?>
-
-
-
+</div>
 </body>
 </html>

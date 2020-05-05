@@ -41,7 +41,16 @@ echo 'Connected successfully ';
                     <input type="text" name="friends_transaction" id="friends_transaction" class="form-control input-sm" placeholder="Pseudo" required>
                 </div>
             </div>
-                <input class="btn btn-primary btn-sm" type="submit" value="Voir les transactions" id="submit"> 
+                <input class="btn btn-primary btn-sm" type="submit" value="Voir l'ensemble des transactions" id="submit"> 
+        </form> 
+        <form method="post" action="historique_2.php" >  
+            <div class="form-row">
+                <div class="col-md-4 mb-3" id="ajout">
+                        <label for="friends_transaction"> Rentrer le pseudo de l'ami dont vous voulez consulter les transactions </label>
+                        <input type="text" name="friends_transaction_alive" id="friends_transaction_alive" class="form-control input-sm" placeholder="Pseudo" required>
+                </div>
+            </div>
+                <input class="btn btn-primary btn-sm" type="submit" value="Voir seulement les transactions ouvertes" id="submit"> 
                 
         </form> 
         </div>  
