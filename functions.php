@@ -114,3 +114,15 @@ function addtransaction($id_user_dept, $id_user_waiting, $statut, $date_de_creat
   mysqli_close($link);
   return $id_final;
 }
+
+//Fct qui ajoute une transaction de groupe
+function addtransactiongroup($id_user_dept, $id_user_waiting, $statut, $date_de_creation, $message_explicatif, $date_de_fermeture,$message_de_fermeture,$sum,$link) {
+  $stmt = mysqli_prepare($link, "INSERT INTO Transaction_Ami (id_user_dept, id_user_waiting, statut, date_de_creation, message_explicatif, date_de_fermeture, message_de_fermeture, sum) VALUES (?,?,?,?,?,?,?,?)");
+  mysqli_stmt_bind_param($stmt, 'iisssssi', $id_user_dept, $id_user_waiting, $statut, $date_de_creation, $message_explicatif, $date_de_fermeture,$message_de_fermeture,$sum);
+  mysqli_stmt_execute($stmt);
+  printf("%d ligne insérée.\n", mysqli_stmt_affected_rows($stmt));
+  printf("Erreur : %s.\n", mysqli_stmt_error($stmt));
+  $id_final = mysqli_insert_id($link);
+  //mysqli_close($link);
+  return $id_final;
+}
