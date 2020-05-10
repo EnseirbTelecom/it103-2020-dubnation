@@ -1,0 +1,27 @@
+<?php
+include ("modif.php");
+//include ("functions.php");
+session_start();
+?>
+
+
+<?php
+$link = mysqli_connect('localhost', 'admin', 'it103','Dubnation');
+
+if (empty($_POST["idtrans"]) || empty($_POST["mess_explicatif"]) || empty($_POST["newmontant"])){
+    echo "champs pas remplis";
+	}
+
+	 elseif (isset($_POST["idtrans"]) && isset($_POST["mess_explicatif"]) && isset($_POST["newmontant"])) {
+         //echo "Modifi";
+				 $new_message=$_POST["mess_explicatif"];
+				 $new_montant=$_POST["newmontant"];
+         $idtrans=$_POST["idtrans"];
+         UpdateTrans($link,$idtrans,$new_message,$new_montant);
+       }
+
+  ?>
+
+  <form method="link" action="myindex.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>
+      </head>
+      </html>
