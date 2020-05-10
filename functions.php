@@ -34,7 +34,7 @@ function checkSignMail($email,$link){
     echo "Email déjà utilisé, veuillez-le changer";
     exit();
   }
-    
+
 }
 
 
@@ -51,7 +51,7 @@ function checkSignPseudo($pseudo,$link){
     echo "Pseudo déjà utilisé, veuillez-le changer";
     exit();
   }
-    
+
 }
 
 
@@ -125,4 +125,36 @@ function addtransactiongroup($id_user_dept, $id_user_waiting, $statut, $date_de_
   $id_final = mysqli_insert_id($link);
   //mysqli_close($link);
   return $id_final;
+}
+
+function UpdateTrans($link,$idtrans,$new_message,$new_montant){
+  //echo $idtrans;
+  //echo $new_message;
+  //echo $new_montant;
+  $Requete = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE id = \"$idtrans\";");
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  if (!$result) {
+     echo "Le numéro de transaction est incorrect";
+     exit();
+   }
+  if ($result[0]["statut"]=="closed" || $result[0]["statut"]=="canceled"){
+    echo "Vous ne pouvez pas modifier une transaction fermée ou annulée";
+    exit();
+  }
+
+
+  $sql="UPDATE Transaction_Ami SET message_explicatif= \"$new_message\" , sum = \"$new_montant\" WHERE id = \"$idtrans\"";
+  mysqli_query($link,$sql);
+  echo "Modification effectuée";
+
+
+
+  //if (mysqli_query($link, $sql)) {
+  //echo "Record updated successfully";
+//} else {
+  //echo "Error updating record: "
+//}
+
+
+
 }
