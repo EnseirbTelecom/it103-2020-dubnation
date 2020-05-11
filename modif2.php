@@ -22,6 +22,6 @@ if (empty($_POST["idtrans"]) || empty($_POST["mess_explicatif"]) || empty($_POST
 
   ?>
 
-  <form method="link" action="myindex.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>
+  <form method="link" action="myprofile.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>
       </head>
       </html>

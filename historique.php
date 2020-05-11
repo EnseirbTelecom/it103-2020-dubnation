@@ -86,8 +86,8 @@ else{
             <div id="exigence">
             <?php
             if ($result1[$i]["id_user_dept"] == $user_con && $result1[$i]["id_user_waiting"] == $id_friends_transaction) {
-								echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"]; echo '&nbsp';
-								echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
+				?> <div id="Red"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
+				echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_waiting"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
@@ -98,8 +98,8 @@ else{
                 echo "<br/>";
             }
             if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
-								echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"]; echo '&nbsp';
-								echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
+				?> <div id="Green"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
+				echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_dept"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
@@ -113,8 +113,8 @@ else{
     }
         else{
             if ($result1[$i]["id_user_dept"] == $user_con && $result1[$i]["id_user_waiting"] == $id_friends_transaction) {
-                echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"]; echo '&nbsp';
-								echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
+                ?> <div id="Red"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
+				echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_waiting"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
@@ -122,20 +122,20 @@ else{
                 echo "DONC:"; echo '&nbsp'; echo "Tu dois:"; echo '&nbsp';
                 ?> <div id="Red"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
                 echo "à"; echo '&nbsp';echo $result2[0]["pseudo"];
-								?> <a href="modif.php"  target="_blank"> <input type="button" value="modifier"> </a> <?php
+								?> <a href="modif.php"  target="_blank"> <input type="button" value="Modifier"> </a> <?php
 
                 echo "<br/>";
             }
             if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
-                echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"]; echo '&nbsp';
-								echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
+                ?> <div id="Green"><?php echo "Transaction N°";echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
+				echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_dept"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
                 $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
                 //var_dump($result2);
                 echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
-                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?><a href="modif.php" target="_blank"> <input type="button" value="modifier"> </a></div><?php
+                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?><a href="modif.php" target="_blank"> <input type="button" value="Modifier"> </a></div><?php
 
             }
 
