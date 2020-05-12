@@ -154,7 +154,64 @@ function UpdateTrans($link,$idtrans,$new_message,$new_montant){
 //} else {
   //echo "Error updating record: "
 //}
+}
 
+function AnnulTrans($link,$idtrans,$mess_fermeture){
+  //echo $idtrans;
+  //echo $mess_fermeture;
+  $Requete = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE id = \"$idtrans\";");
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  if (!$result) {
+     echo "Le numéro de transaction est incorrect";
+     exit();
+   }
+  if ($result[0]["statut"]=="closed" || $result[0]["statut"]=="canceled"){
+    echo "Vous ne pouvez pas annuler une transaction déjà fermée ou annulée";
+    exit();
+  }
+
+
+  $sql="UPDATE Transaction_Ami SET message_de_fermeture= \"$mess_fermeture\" , statut = 'canceled' WHERE id = \"$idtrans\"";
+  mysqli_query($link,$sql);
+  echo "Annulation effectuée";
+
+
+
+  //if (mysqli_query($link, $sql)) {
+  //echo "Record updated successfully";
+//} else {
+  //echo "Error updating record: "
+//}
+
+
+}
+
+function FermeTrans($link,$idtrans,$mess_fermeture){
+  //echo $idtrans;
+  //echo $mess_fermeture;
+  $Requete = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE id = \"$idtrans\";");
+  $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+  if (!$result) {
+     echo "Le numéro de transaction est incorrect";
+     exit();
+   }
+  if ($result[0]["statut"]=="closed" || $result[0]["statut"]=="canceled"){
+    echo "Vous ne pouvez pas fermer une transaction déjà fermée ou annulée";
+    exit();
+  }
+
+
+  $sql="UPDATE Transaction_Ami SET message_de_fermeture= \"$mess_fermeture\" , statut = 'closed' WHERE id = \"$idtrans\"";
+  mysqli_query($link,$sql);
+  echo "Fermeture effectuée";
+
+
+
+  //if (mysqli_query($link, $sql)) {
+  //echo "Record updated successfully";
+//} else {
+  //echo "Error updating record: "
+//}
 
 
 }
