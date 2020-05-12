@@ -94,6 +94,7 @@ else{
                 echo "DONC:"; echo '&nbsp'; echo "Tu dois:"; echo '&nbsp';
                 ?> <div id="Red"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
                 echo "à"; echo '&nbsp';echo $result2[0]["pseudo"];
+								?> <a href="modif.php"  target="_blank"> <input type="button" value="Modifier"> </a> <?php
                 echo "<br/>";
             }
             if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
@@ -105,7 +106,8 @@ else{
                 $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
                 //var_dump($result2);
                 echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
-                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
+                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?>
+								 <a href="modif.php"  target="_blank"> <input type="button" value="Modifier"> </a> </div><?php
             }
         }
     }
