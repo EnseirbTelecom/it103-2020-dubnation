@@ -1,7 +1,10 @@
 <?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
     include("functions.php");
     session_start();
-?>    
+?>
 
 <?php
 
@@ -15,8 +18,8 @@ echo 'Connected successfully ';
 
 //var_dump($_POST);
 if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password_check"]) && isset($_POST["birth"]) ){
-    
-    
+
+
     if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password_check"]) || empty($_POST["birth"]) ){
 		echo 'L INSCRIPTION A ÉCHOUÉ: Tous les champs ne sont pas remplis ';
     }
@@ -29,7 +32,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
             checkSignPseudo($_POST["username"],$link);
             $condition+=1;
             echo $condition;
-        }    
+        }
 
     	if (empty($_POST["email"])){
             echo 'Remplissez le champ Email';
@@ -39,7 +42,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
             $condition+=1;
             echo $condition;
             }
-		
+
     	if ($_POST["password"]!=$_POST["password_check"] || empty($_POST["password"]) || strlen($_POST["firstname"])<2 || strlen($_POST["lastname"])<2){
             echo 'Vos prénoms et noms ont-ils plus de deux caractères ?';
             echo 'ERREUR: Merci de bien confirmer votre mot de passe ';

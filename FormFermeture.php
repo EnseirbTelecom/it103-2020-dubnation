@@ -1,4 +1,7 @@
 <?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
   include("functions.php");
   //include("historique_2.php");
     session_start();
@@ -37,8 +40,8 @@
     <input id='mf' type="text" name="MessFerm"/><br />
 
     <input type="submit" name="remboursement" value="Fermer ces transactions par remboursement" id="submit"/><input type="submit" name ="annulation" value="Fermer ces transactions par annulation" id="submit">
-    
-  
+
+
 
 </p>
 

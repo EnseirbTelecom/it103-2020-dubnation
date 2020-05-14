@@ -1,5 +1,8 @@
-<?php 
-	include("functions.php");
+<?php
+		$ttl = 3600; // Une heure, en secondes
+		session_set_cookie_params($ttl);
+		ini_set('session.gc_maxlifetime', $ttl);
+		include("functions.php");
     session_start();
 ?>
 <?php
@@ -44,7 +47,7 @@ if ($_SESSION["pseudo"]){
 </head>
 <body>
     <h1> Voici tes listes de dettes et de créances </h1>
-    
+
 
 
 <?php
@@ -54,31 +57,31 @@ if ($_SESSION["pseudo"]){
     //var_dump($result1);?>
     <h2> Liste des dettes </h2>
         <div id="exigence1"><?php
-    $dette = 0;    
-    for ($i=0; $i <sizeof($result1) ; $i++) { 
+    $dette = 0;
+    for ($i=0; $i <sizeof($result1) ; $i++) {
         if ($result1[$i]["statut"] == 'opened') {
             if ($result1[$i]["id_user_dept"] == $user_con) {
-                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp'; 
+                echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_waiting"];
                 $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");
                 $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
                 echo "DONC:"; echo '&nbsp'; echo "Tu dois:"; echo '&nbsp';
                 echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';
-                echo "à"; echo '&nbsp';echo $result2[0]["pseudo"]; 
+                echo "à"; echo '&nbsp';echo $result2[0]["pseudo"];
                 $dette -= $result1[$i]["sum"];
-                echo "<br/>"; 
-            } 
+                echo "<br/>";
+            }
         }
-    }?> </div> 
+    }?> </div>
             <h2> Liste des créances </h2>
             <div id="exigence2">
             <?php
             $creance = 0;
-            for ($i=0; $i <sizeof($result1) ; $i++) { 
+            for ($i=0; $i <sizeof($result1) ; $i++) {
                 if ($result1[$i]["statut"] == 'opened') {
                     if ($result1[$i]["id_user_waiting"] == $user_con) {
-                        echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp'; 
+                        echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                         echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                         $useridfriend = $result1[$i]["id_user_dept"];
                         $requete2 = mysqli_query($link,"SELECT pseudo FROM user WHERE userid = \"$useridfriend\";");

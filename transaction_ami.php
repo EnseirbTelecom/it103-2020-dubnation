@@ -1,4 +1,7 @@
-<?php 
+<?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
 	include("functions.php");
     session_start();
 ?>
@@ -100,8 +103,8 @@
                 <div class="valid-feedback">Ok !</div>
                 <div class="invalid-feedback">Valeur incorrecte</div>
             </div>
-            <input type="submit" value="Saisir la transaction" id="payer">  
-          </form>  
+            <input type="submit" value="Saisir la transaction" id="payer">
+          </form>
          </div>
          </div>
          </div>

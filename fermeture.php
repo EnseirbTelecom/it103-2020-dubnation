@@ -1,6 +1,9 @@
 <?php
   include ("FormFermeture.php");
 //include ("functions.php");
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
 session_start();
 ?>
 

@@ -1,7 +1,10 @@
 <?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
     session_start();
     include("functions.php");
-?>    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -43,20 +46,20 @@ if ($_SESSION["pseudo"]){
     //var_dump($user_check);
 }
 
-for ($i=0; $i<sizeof($result_1) ; $i++) { 
+for ($i=0; $i<sizeof($result_1) ; $i++) {
   if ($result_1[$i]["id_username_1"] == $_SESSION["userid"]) {
       $friend = $result_1[$i]["id_username_2"];
       $Requete_2 = mysqli_query($link,"SELECT first_name, last_name, pseudo FROM user WHERE userid = \"$friend\";");
       $result_2 = mysqli_fetch_all($Requete_2, MYSQLI_ASSOC);
-      $user_check[]=$result_2[0]["pseudo"]; 
-      
+      $user_check[]=$result_2[0]["pseudo"];
+
   }
   if ($result_1[$i]["id_username_2"] == $_SESSION["userid"]) {
       $friend_bis = $result_1[$i]["id_username_1"];
       $Requete_3 = mysqli_query($link,"SELECT userid, first_name, last_name, pseudo FROM user WHERE userid = \"$friend_bis\";");
       $result_3 = mysqli_fetch_all($Requete_3, MYSQLI_ASSOC);
       //var_dump($result_3);
-      $user_check[]=$result_3[0]["pseudo"];                 
+      $user_check[]=$result_3[0]["pseudo"];
   }
 }
 
@@ -64,7 +67,7 @@ if (isset($_POST["utilisateur_source"]) && isset($_POST["utilisateur_cible"]) &&
   if (empty($_POST["utilisateur_source"]) || empty($_POST["utilisateur_cible"]) || empty($_POST["Message_Explicatif"]) || empty($_POST["Montant"]) || empty($_POST["date_de_création"]) || empty($_POST["Statut"]) || empty($_POST["Message_de_fermeture"]) || empty($_POST["date_de_fermeture"]) ){
     echo "L'enregistrement de la transaction a échoué: Vous devez remplir tous les champs.";
   }
-  
+
   if (($_POST["utilisateur_source"])!=$_SESSION["pseudo"]){
     echo 'Vous ne pouvez pas réaliser les transactions pour d autres utilisateurs';
     exit();
@@ -97,8 +100,8 @@ if (isset($_POST["utilisateur_source"]) && isset($_POST["utilisateur_cible"]) &&
   }
 
 
-  
-  
+
+
 }
 ?>
 <form method="link" action="myprofile.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>

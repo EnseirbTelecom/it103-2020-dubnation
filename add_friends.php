@@ -1,7 +1,10 @@
 <?php
+    $ttl = 3600; // Une heure, en secondes     
+    session_set_cookie_params($ttl);
+    ini_set('session.gc_maxlifetime', $ttl);
     session_start();
     include("functions.php");
-?>    
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -68,32 +71,32 @@ if (isset($_POST["friends_name"])){
     //     echo "Vous ne pouvez pas vous ajouter";
     // }
 
-    for ($i=0; $i<sizeof($result_1) ; $i++) { 
+    for ($i=0; $i<sizeof($result_1) ; $i++) {
         if ($result_1[$i]["id_username_1"] == $_SESSION["userid"]) {
             $friend = $result_1[$i]["id_username_2"];
             $Requete_2 = mysqli_query($link,"SELECT first_name, last_name, pseudo FROM user WHERE userid = \"$friend\";");
             $result_2 = mysqli_fetch_all($Requete_2, MYSQLI_ASSOC);
-            $user_check[]=$result_2[0]["pseudo"]; 
-            
+            $user_check[]=$result_2[0]["pseudo"];
+
         }
         if ($result_1[$i]["id_username_2"] == $_SESSION["userid"]) {
             $friend_bis = $result_1[$i]["id_username_1"];
             $Requete_3 = mysqli_query($link,"SELECT userid, first_name, last_name, pseudo FROM user WHERE userid = \"$friend_bis\";");
             $result_3 = mysqli_fetch_all($Requete_3, MYSQLI_ASSOC);
             //var_dump($result_3);
-            $user_check[]=$result_3[0]["pseudo"];                 
+            $user_check[]=$result_3[0]["pseudo"];
         }
     }
 
-    for ($i=1; $i <sizeof($result_5) ; $i++) { 
+    for ($i=1; $i <sizeof($result_5) ; $i++) {
             $user_global[]=$result_5[$i]["pseudo"];
     }
     //var_dump($user_global);
     if (!in_array($_POST["friends_name"],$user_global)){
         echo "Cet utilisateur n'existe pas sur Debster";
         exit();
-    }    
-    
+    }
+
     //var_dump($user_check);
     if (in_array($_POST["friends_name"],$user_check)) {
         echo "C'est déjà votre ami !";

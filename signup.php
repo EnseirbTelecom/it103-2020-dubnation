@@ -1,5 +1,8 @@
 
-<?php 
+<?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
 	include("functions.php");
     session_start();
 ?>
@@ -61,7 +64,7 @@
                                         </div>
                                         <input type="text" name ="email" class="form-control input-sm" placeholder="Email" required>
                                         <div class="invalid-feedback">
-                                            Veuillez rentrer votre email 
+                                            Veuillez rentrer votre email
                                         </div>
                                     </div>
                                 </div>
@@ -81,31 +84,31 @@
 										Veuillez choisir votre pseudo
 									</div>
                             </div>
-                        </div>    
+                        </div>
                             <div class="form-group row">
                                 <label for="password" class="col-sm-2 col-form-label"> Mot de Passe </label>
                                 <div class="col-sm-10">
                                     <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
                                 </div>
-                            </div>    
+                            </div>
                             <div class="form-group row">
                                 <label for="password_check" class="col-sm-2 col-form-label"> Mot de passe à confirmer </label>
                                 <div class="col-sm-10">
                                     <input type="password" name="password_check" class="form-control" id="password_check" placeholder="Mot de passe">
                                 </div>
-                            </div> 
-                            <input type="submit" value="S'inscrire" id="submit">                            
+                            </div>
+                            <input type="submit" value="S'inscrire" id="submit">
 						</form>
 						</div>
 					</div>
 				</div>
-            
+
 
 			</div>
         </div>
-        
+
         <script>
-			
+
 //source pour le script: https://www.pierre-giraud.com/bootstrap-apprendre-cours/formulaire/
 
 			(function() {

@@ -1,4 +1,7 @@
 <?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
 include ("functions.php");
 session_start();
 ?>

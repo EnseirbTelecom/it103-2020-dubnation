@@ -1,4 +1,7 @@
-<?php 
+<?php
+$ttl = 3600; // Une heure, en secondes
+session_set_cookie_params($ttl);
+ini_set('session.gc_maxlifetime', $ttl);
 	include("functions.php");
     session_start();
 ?>
@@ -56,24 +59,24 @@ if ($_SESSION["pseudo"]){
     //var_dump($user_check);
 }
 
-for ($i=0; $i<sizeof($result_1) ; $i++) { 
+for ($i=0; $i<sizeof($result_1) ; $i++) {
   if ($result_1[$i]["id_username_1"] == $_SESSION["userid"]) {
       $friend = $result_1[$i]["id_username_2"];
       $Requete_2 = mysqli_query($link,"SELECT first_name, last_name, pseudo FROM user WHERE userid = \"$friend\";");
       $result_2 = mysqli_fetch_all($Requete_2, MYSQLI_ASSOC);
-      $user_check[]=$result_2[0]["pseudo"]; 
-      
+      $user_check[]=$result_2[0]["pseudo"];
+
   }
   if ($result_1[$i]["id_username_2"] == $_SESSION["userid"]) {
       $friend_bis = $result_1[$i]["id_username_1"];
       $Requete_3 = mysqli_query($link,"SELECT userid, first_name, last_name, pseudo FROM user WHERE userid = \"$friend_bis\";");
       $result_3 = mysqli_fetch_all($Requete_3, MYSQLI_ASSOC);
       //var_dump($result_3);
-      $user_check[]=$result_3[0]["pseudo"];                 
+      $user_check[]=$result_3[0]["pseudo"];
   }
 }
 $length=sizeof($user_check);
-                        ////////////                        
+                        ////////////
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +106,7 @@ $length=sizeof($user_check);
 					<h2 class="panel-title">Saisissez les différents montants pour chacun de vos amis</h2>
 				</div>
 					<div class="panel-body" id="debut">
-					<form method="post" action="sum_different_action.php" > 
+					<form method="post" action="sum_different_action.php" >
         <div class="form-row">
             <?php for ($i=1; $i <$length ; $i++) { ?>
             <div class="form-group col-md-6">

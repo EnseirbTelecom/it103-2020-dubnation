@@ -1,7 +1,10 @@
 <?php
+    $ttl = 3600; // Une heure, en secondes
+    session_set_cookie_params($ttl);
+    ini_set('session.gc_maxlifetime', $ttl);
     session_start();
     include("functions.php");
-?>    
+?>
 
 <?php
 
@@ -58,13 +61,13 @@ if ($_SESSION["pseudo"]){
 
     </head>
     <body>
-    
+
 
     <h1> Bienvenue sur ton carnet d'amis: <?php echo $_SESSION["pseudo"];?> </h1>
         <h2> Liste d'amis</h2>
         <div id="debut">
         <?php
-            for ($i=0; $i<sizeof($result_1) ; $i++) { 
+            for ($i=0; $i<sizeof($result_1) ; $i++) {
                 if ($result_1[$i]["id_username_1"] == $_SESSION["userid"]) {
                     //echo $result_1[$i]["id_username_2"];
                     $friend = $result_1[$i]["id_username_2"];
@@ -86,14 +89,14 @@ if ($_SESSION["pseudo"]){
                     echo $result_3[0]["last_name"]; echo '&nbsp';
                     echo $result_3[0]["first_name"]; echo '&nbsp';
                     $user_check[]=$result_3[0]["pseudo"];?>
-                    <div id="exigence"> <?php echo"Pseudo:"?> <?php echo $result_3[0]["pseudo"];echo "<br/>"; ?> </div>  
-                    <?php                 
+                    <div id="exigence"> <?php echo"Pseudo:"?> <?php echo $result_3[0]["pseudo"];echo "<br/>"; ?> </div>
+                    <?php
                 }
             }
-            
+
         ?>
         </div>
-    
+
         <div class="panel-body">
 			<form method="post" action="delete_friends.php" >
                 <div class="form-row">
@@ -102,12 +105,12 @@ if ($_SESSION["pseudo"]){
                         <input type="text" name="friends_deleted" id="friends_deleted" class="form-control input-sm" placeholder="Pseudo" required>
                     </div>
                     </div>
-                    <input class="btn btn-primary btn-sm" type="submit" value="Supprimer" id="submit"> 
-                
-        </form> 
-        </div>  
-        
-        
+                    <input class="btn btn-primary btn-sm" type="submit" value="Supprimer" id="submit">
+
+        </form>
+        </div>
+
+
         <h2> Autres utilisateurs </h2>
         <div id="debut">
     <?php
@@ -116,14 +119,14 @@ if ($_SESSION["pseudo"]){
         $result_4 = mysqli_fetch_all($Requete_4, MYSQLI_ASSOC);
         //var_dump($result_4);
         //echo $result_4[1]["pseudo"];
-        for ($i=0; $i < sizeof($result_4); $i++) { 
+        for ($i=0; $i < sizeof($result_4); $i++) {
             if (!in_array($result_4[$i]["pseudo"],$user_check)) {
-                echo $result_4[$i]["pseudo"]; 
+                echo $result_4[$i]["pseudo"];
                 //echo $result_4[$i]["userid"];
-                
-                
+
+
             }
-            echo "<br/>";    
+            echo "<br/>";
         }
     ?>
 
@@ -136,9 +139,9 @@ if ($_SESSION["pseudo"]){
                         <input type="text" name="friends_name" id="friends_name" class="form-control input-sm" placeholder="Pseudo" required>
                     </div>
                     </div>
-                    <input class="btn btn-primary btn-sm" type="submit" value="Ajouter" id="submit"> 
-                
-    </form> 
-    </div>   
+                    <input class="btn btn-primary btn-sm" type="submit" value="Ajouter" id="submit">
+
+    </form>
+    </div>
     </body>
     </html>
