@@ -93,7 +93,6 @@ for ($i=0; $i <$length ; $i++) {
     }    
 }
 ?>
-
 <form method="link" action="myprofile.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>
 </body>
 </html>

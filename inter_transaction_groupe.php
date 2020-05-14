@@ -32,7 +32,7 @@
 
     <h2> Même montant pour chaque ami </h2>
 
-    <button type="button" class="btn btn-dark" id="debut"><a href='same_sum.php'> Transaction de groupe avec même montant pour chaque ami </a></button>
+    <button type="button" class="btn btn-dark" id="debut"><a href='transaction_grp.php'> Transaction de groupe avec même montant pour chaque ami </a></button>
 
     <h2> Montant différent selon les amis </h2>
 

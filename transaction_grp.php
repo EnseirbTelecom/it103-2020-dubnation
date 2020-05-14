@@ -1,7 +1,63 @@
 <?php
-	include("functions.php");
+	  include("functions.php");
     session_start();
 ?>
+
+<?php
+$link = mysqli_connect('localhost', 'admin', 'it103','Dubnation');
+if (!$link) {
+		echo "Probleme de connexion";
+		die('Could not connect: ' . mysqli_error());
+}
+echo 'Connected successfully ';
+
+$pseudo_1 = $_SESSION["pseudo"];
+//echo $pseudo_1;
+$Requete = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$pseudo_1\";");
+$result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
+
+//echo $result[0]["userid"];
+$_SESSION["userid"] = $result[0]["userid"];
+//echo $_SESSION["userid"];
+$user_con = $result[0]["userid"];
+//echo $_SESSION["userid"];
+
+
+                            ///////////////
+
+// Toutes les relations d'amis en lien avec le user connecté
+$Requete_1 = mysqli_query($link,"SELECT * FROM Reach_my_friend WHERE id_username_1 = \"$user_con\" OR id_username_2 = \"$user_con\";");
+$result_1 = mysqli_fetch_all($Requete_1, MYSQLI_ASSOC);
+//var_dump($result_1);
+                            /////////////
+
+if ($_SESSION["pseudo"]){
+    $user_check[]=$_SESSION["pseudo"];
+    //var_dump($user_check);
+}
+
+for ($i=0; $i<sizeof($result_1) ; $i++) { 
+  if ($result_1[$i]["id_username_1"] == $_SESSION["userid"]) {
+      $friend = $result_1[$i]["id_username_2"];
+      $Requete_2 = mysqli_query($link,"SELECT first_name, last_name, pseudo FROM user WHERE userid = \"$friend\";");
+      $result_2 = mysqli_fetch_all($Requete_2, MYSQLI_ASSOC);
+      $user_check[]=$result_2[0]["pseudo"]; 
+      
+  }
+  if ($result_1[$i]["id_username_2"] == $_SESSION["userid"]) {
+      $friend_bis = $result_1[$i]["id_username_1"];
+      $Requete_3 = mysqli_query($link,"SELECT userid, first_name, last_name, pseudo FROM user WHERE userid = \"$friend_bis\";");
+      $result_3 = mysqli_fetch_all($Requete_3, MYSQLI_ASSOC);
+      //var_dump($result_3);
+      $user_check[]=$result_3[0]["pseudo"];                 
+  }
+}
+$length=sizeof($user_check);
+// var_dump($user_check);
+// echo $user_check[2];
+?>
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -41,16 +97,6 @@
                       Veuillez rentrer votre pseudo
                   </div>
             </div>
-            <div class="col-md-4 mb-3">
-	            <label for="utilisateur_cible[]"> Utilisateurs cibles </label>
-							<input type="text" name="utilisateur_cible" id="utilisateur_cible" class="form-control input-sm" placeholder="Rentrez les pseudos de vos amis séparés par des virgules" required>
-								<div class="valid-feedback">
-										Complétez l'ensemble des champs
-								</div>
-								<div class="invalid-feedback">
-										Veuillez rentrer les pseudos de vos amis séparés par des virgules.
-								</div>
-	            </div>
             <div class="col-md-4 mb-3">
               <label for="Message_Explicatif">Contexte</label>
                 <div class="input-group">
@@ -98,6 +144,17 @@
                 <input type="date" class="form-control" id="date_de_fermeture" name="date_de_fermeture" placeholder="Rentrez la date de fermeture" required>
                 <div class="valid-feedback">Ok !</div>
                 <div class="invalid-feedback">Valeur incorrecte</div>
+            </div>
+            <div class="form-row">
+            <label for="utilisateur_cible[]"> Utilisateurs cibles </label>
+                <div class="form-check">
+                <?php for ($i=1; $i <$length ; $i++) { ?>
+                    <input class="form-check-input" type="checkbox" name="utilisateur_cible[]" id="utilisateur_cible" value="<?php echo $user_check[$i];?>">
+                    <label class="form-check-label" for="utilisateur_cible">
+                        <?php echo $user_check[$i]; ?>
+                        <?php echo "<br/>";} ?>
+                    </label>
+                </div>
             </div>
             <input type="submit" value="Saisir la transaction" id="payer">
           </form>
