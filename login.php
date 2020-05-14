@@ -20,7 +20,7 @@ ini_set('session.gc_maxlifetime', $ttl);
 <body>
 
 <title> Connexion </title>
-<h1> Connectes-toi sur Debster !</h1>
+<h1> Connecte-toi sur Debster !</h1>
 <p>
     Votre pseudo :<br />
     <input id='pseudo' type="text" name="pseudo"/><br />
