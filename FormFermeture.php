@@ -37,14 +37,13 @@
     <input id='mf' type="text" name="MessFerm"/><br />
 
     <input type="submit" name="remboursement" value="Fermer ces transactions par remboursement" id="submit"/><input type="submit" name ="annulation" value="Fermer ces transactions par annulation" id="submit">
-
+    
+  
 
 </p>
 
-
-
-
-
 </form>
+<form method="link" action="myprofile.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>
+
 
 </head></html>
