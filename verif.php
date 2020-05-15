@@ -16,6 +16,7 @@ echo 'Connected successfully';
 
 if (empty($_POST["pseudo"]) || empty($_POST["password"])){
     echo "champs pas remplis";
+    exit();
 	}
 
 		elseif (isset($_POST["pseudo"]) && isset($_POST["password"])) {

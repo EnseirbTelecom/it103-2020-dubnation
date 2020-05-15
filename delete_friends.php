@@ -94,8 +94,8 @@ if (isset($_POST["friends_deleted"])){
         $friend_added=$_POST["friends_deleted"];
         $Requete_finale = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$friend_added\";");
         $result_final = mysqli_fetch_all($Requete_finale, MYSQLI_ASSOC);
-        echo $result_final[0]["userid"];
-        echo $_SESSION["userid"];
+        //echo $result_final[0]["userid"];
+        //echo $_SESSION["userid"];
         if ($condition == 1 ){
             delete_friendship($_SESSION["userid"],$result_final[0]["userid"],$link);
         }

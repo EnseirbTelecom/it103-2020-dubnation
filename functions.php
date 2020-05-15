@@ -96,10 +96,10 @@ function addfriendship($id_user,$id_friend,$link){
 
 //fct qui supprime une relation d'amitié
 function delete_friendship($id_user,$id_friend,$link){
-  echo "zac";
+  //echo "zac";
   $Requete = mysqli_query($link, "DELETE FROM Reach_my_friend  WHERE id_username_1 = \"$id_user\" AND id_username_2 = \"$id_friend\" OR id_username_1 = \"$id_friend\" AND id_username_2 = \"$id_user\" ;");
   $result = mysqli_fetch_all($Requete, MYSQLI_ASSOC);
-  var_dump($result);
+  //var_dump($result);
   mysqli_close($link);
 }
 

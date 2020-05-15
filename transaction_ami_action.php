@@ -90,7 +90,7 @@ if (isset($_POST["utilisateur_source"]) && isset($_POST["utilisateur_cible"]) &&
           $friend_to_transaction = $_POST["utilisateur_cible"];
           $Requete_4 = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$friend_to_transaction\";");
           $result_4 = mysqli_fetch_all($Requete_4, MYSQLI_ASSOC);
-          echo $_POST["Statut"];
+          //echo $_POST["Statut"];
           addtransaction($_SESSION["userid"], $result_4[0]["userid"], $_POST["Statut"], $_POST["date_de_création"], $_POST["Message_Explicatif"], $_POST["date_de_fermeture"],$_POST["Message_de_fermeture"],$_POST["Montant"],$link);
         }
       }
