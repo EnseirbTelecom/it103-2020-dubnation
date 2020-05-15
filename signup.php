@@ -7,6 +7,7 @@ ini_set('session.gc_maxlifetime', $ttl);
     session_start();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -72,7 +73,19 @@ ini_set('session.gc_maxlifetime', $ttl);
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="birth"> Date de Naissance </label>
-                                <input class="form-control input-sm" type="date" name="birth">
+
+																<script>
+																function DDMMYYYY(value, event) {
+  															let newValue = value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+  															const dayOrMonth = (index) => index % 2 === 1 && index < 4;
+  															if (!event.data) {
+    															return value;
+  															}
+  															return newValue.split('').map((v, i) => dayOrMonth(i) ? v + '/' : v).join('');;
+																}
+																</script>
+
+								<input type="tel" maxlength="10" placeholder="dd/mm/yyyy" oninput="this.value = DDMMYYYY(this.value, event)" />
 								<div class="invalid-feedback">
 									Veuillez rentrer votre date de naissance
 								</div>
