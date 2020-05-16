@@ -67,7 +67,8 @@ function checkPassword($pseudo,$password,$link){
   //   }
 
   if (!$result) {
-	   echo "L'utilisateur est incorrect.";
+     echo "L'utilisateur est incorrect.";
+     exit();
 } else {
 	 $hash = $result[0]["password"];
    // echo $hash;
