@@ -53,10 +53,14 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
             echo $condition;
         }
 
+        // Change date format
+        $Date = $_POST['birth'];
+        $newDate = implode('-', array_reverse (explode('/',$Date)));
+
         if ($condition==3)
         {
             echo 'L INCRIPTION EST RÉUSSIE: Continuez Vers la connexion';
-            $user_id=addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],crypt($_POST["password"]),$_POST["birth"],$_POST["username"],$link);
+            $user_id=addUser($_POST["firstname"],$_POST["lastname"],$_POST["email"],crypt($_POST["password"]),$newDate,$_POST["username"],$link);
 			// $_SESSION["userid"]=$user_id;
 			// $_SESSION["first_name"]=$_POST["firstname"];
 			// $_SESSION["last_name"]=$_POST["lastname"];
