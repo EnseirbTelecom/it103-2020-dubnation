@@ -88,7 +88,7 @@ else{
             <div>
             <?php
             if ($result1[$i]["id_user_dept"] == $user_con && $result1[$i]["id_user_waiting"] == $id_friends_transaction) {
-							?> <div id="Red"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
+				?> <div id="Red"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
                 echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_waiting"];
@@ -97,11 +97,10 @@ else{
                 echo "DONC:"; echo '&nbsp'; echo "Tu dois:"; echo '&nbsp';
                 ?> <div id="Red"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
                 echo "à"; echo '&nbsp';echo $result2[0]["pseudo"];
-								?> <a href="modif.php"  target="_blank"> <input type="button" value="Modifier"> </a> <?php
                 echo "<br/>";
             }
             if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
-							?> <div id="Green"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
+				?> <div id="Green"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
                 echo "DATE:"; echo '&nbsp'; echo $result1[$i]["date_de_creation"]; echo '&nbsp';
                 echo "CONTEXTE:"; echo '&nbsp'; echo $result1[$i]["message_explicatif"]; echo '&nbsp';
                 $useridfriend = $result1[$i]["id_user_dept"];
@@ -109,12 +108,13 @@ else{
                 $result2 = mysqli_fetch_all($requete2, MYSQLI_ASSOC);
                 //var_dump($result2);
                 echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
-                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?>
-								 <a href="modif.php"  target="_blank"> <input type="button" value="Modifier"> </a> </div><?php
+                ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?> </div><?php
             }
         }
-    }
+    }echo "<br/>";?>
+    </div><?php
 }
+$_SESSION["friends_transaction_alive"]=$_POST["friends_transaction_alive"];
 ?>
 </div>
 </body>

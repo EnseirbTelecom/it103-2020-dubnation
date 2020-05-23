@@ -115,6 +115,9 @@ if (isset($_POST["friends_name"])){
 }
 
 ?>
+<form method="link" action="carnet_amis.php"> <input type="submit" value="Retour au carnet d'amis" id="submit"> </form>
 <form method="link" action="myprofile.php"> <input type="submit" value="Retour à l'accueil" id="submit"> </form>
+
+
 </body>
 </html>
