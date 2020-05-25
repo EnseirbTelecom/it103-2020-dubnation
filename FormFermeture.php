@@ -132,6 +132,9 @@ else{
     Message de fermeture :<br />
     <input id='mf' type="text" name="MessFerm"/><br />
 
+    Date de fermeture :<br />
+    <input id='mf' type="date" name="DateFerm"/><br />
+
     <input type="submit" name="remboursement" value="Fermer ces transactions par remboursement" id="submit"/><input type="submit" name ="annulation" value="Fermer ces transactions par annulation" id="submit">
 
 

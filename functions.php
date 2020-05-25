@@ -157,7 +157,7 @@ function UpdateTrans($link,$idtrans,$new_message,$new_montant){
 //}
 }
 
-function AnnulTrans($link,$idtrans,$mess_fermeture){
+function AnnulTrans($link,$idtrans,$mess_fermeture,$date_fermeture){
   //echo $idtrans;
   //echo $mess_fermeture;
   $Requete = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE id = \"$idtrans\";");
@@ -170,10 +170,17 @@ function AnnulTrans($link,$idtrans,$mess_fermeture){
     echo "Vous ne pouvez pas annuler une transaction déjà fermée ou annulée";
     exit();
   }
+  
+  if ($result[0]["date_de_creation"]>$date_fermeture){
+    echo "La date de création doit être inférieure à la date de fermeture";
+    exit();
+  }
 
 
   $sql="UPDATE Transaction_Ami SET message_de_fermeture= \"$mess_fermeture\" , statut = 'canceled' WHERE id = \"$idtrans\"";
   mysqli_query($link,$sql);
+  $sql_bis="UPDATE Transaction_Ami SET date_de_fermeture= \"$date_fermeture\" , statut = 'canceled' WHERE id = \"$idtrans\"";
+  mysqli_query($link,$sql_bis);
   echo "Annulation effectuée";
 
 
@@ -187,7 +194,7 @@ function AnnulTrans($link,$idtrans,$mess_fermeture){
 
 }
 
-function FermeTrans($link,$idtrans,$mess_fermeture){
+function FermeTrans($link,$idtrans,$mess_fermeture,$date_fermeture){
   //echo $idtrans;
   //echo $mess_fermeture;
   $Requete = mysqli_query($link,"SELECT * FROM Transaction_Ami WHERE id = \"$idtrans\";");
@@ -200,10 +207,16 @@ function FermeTrans($link,$idtrans,$mess_fermeture){
     echo "Vous ne pouvez pas fermer une transaction déjà fermée ou annulée";
     exit();
   }
+  if ($result[0]["date_de_creation"]>$date_fermeture){
+    echo "La date de création doit être inférieure à la date de fermeture";
+    exit();
+  }
 
 
   $sql="UPDATE Transaction_Ami SET message_de_fermeture= \"$mess_fermeture\" , statut = 'closed' WHERE id = \"$idtrans\"";
   mysqli_query($link,$sql);
+  $sql_bis="UPDATE Transaction_Ami SET date_de_fermeture= \"$date_fermeture\" , statut = 'closed' WHERE id = \"$idtrans\"";
+  mysqli_query($link,$sql_bis);
   echo "Fermeture effectuée";
 
 
