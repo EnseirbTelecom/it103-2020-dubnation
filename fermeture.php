@@ -18,6 +18,7 @@ if (isset($_POST["remboursement"])){
     $Mf=$_POST["MessFerm"];
     //echo $Mf;
   }
+  
 
   if (isset($_POST["Tr1"]) && ($_POST["Tr1"]>0)){
     $Tr1=$_POST["Tr1"];

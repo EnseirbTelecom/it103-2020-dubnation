@@ -92,7 +92,7 @@ $length=sizeof($user_check);
           <div class="form-row">
             <div class="col-md-4 mb-3">
               <label for="utilisateur_source"> Utilisateur source </label>
-                <input type="text" name="utilisateur_source" id="utilisateur_source" class="form-control input-sm" placeholder="Rentrez votre pseudo" required>
+                <input type="text" name="utilisateur_source" id="utilisateur_source" class="form-control input-sm" placeholder="Rentrez votre pseudo:<?php echo $_SESSION["pseudo"];?>" required>
                   <div class="valid-feedback">
                       Complétez l'ensemble des champs
                   </div>
@@ -137,14 +137,14 @@ $length=sizeof($user_check);
               <div class="invalid-feedback">Valeur incorrecte</div>
             </div>
             <div class="form-row">
-                <label for="Message_de_fermeture">Message de fermeture</label>
-                <input type="text" class="form-control" id="Message_de_fermeture" name="Message_de_fermeture" placeholder="Merci" required>
+                <label for="Message_de_fermeture">Message recommandé pour la fermeture</label>
+                <input type="text" class="form-control" id="Message_de_fermeture" name="Message_de_fermeture" placeholder="Merci <?php echo $_SESSION["pseudo"];?>" required>
                 <div class="valid-feedback">Ok !</div>
                 <div class="invalid-feedback">Valeur incorrecte</div>
             </div>
             <div class="form-row">
-                <label for="date_de_fermeture">Date de fermeture</label>
-                <input type="date" class="form-control" id="date_de_fermeture" name="date_de_fermeture" placeholder="Rentrez la date de fermeture" required>
+                <label for="date_de_fermeture">Date recommandée pour la fermeture</label>
+                <input type="date" class="form-control" id="date_de_fermeture" name="date_de_fermeture" placeholder="Rentrez la date recommandée pour la fermeture" required>
                 <div class="valid-feedback">Ok !</div>
                 <div class="invalid-feedback">Valeur incorrecte</div>
             </div>

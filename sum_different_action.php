@@ -91,7 +91,7 @@ for ($i=0; $i <$length ; $i++) {
         exit();
     }
     else {
-        echo $id_friends[$i]; echo $_POST["montant"][$i];
+        //echo $id_friends[$i]; echo $_POST["montant"][$i];
         addtransactiongroup($_SESSION["userid"], $id_friends[$i], $_SESSION["Statut"], $_SESSION["date_de_création"], $_SESSION["Message_Explicatif"], $_SESSION["date_de_fermeture"],$_SESSION["Message_de_fermeture"],$_POST["montant"][$i],$link);
     }
 }

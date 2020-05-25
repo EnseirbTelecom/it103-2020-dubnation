@@ -99,7 +99,8 @@ else{
                 echo "DONC:"; echo '&nbsp'; echo "Tu dois:"; echo '&nbsp';
                 ?> <div id="Red"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
                 echo "à"; echo '&nbsp';echo $result2[0]["pseudo"];
-                echo "<br/>";
+                echo "<br/>"; echo "<br/>"; echo "Date de fermeture:"; echo $result1[$i]["date_de_fermeture"];
+                echo "<br/>"; echo "Message de fermeture:"; echo $result1[$i]["message_de_fermeture"];
             }
             if ($result1[$i]["id_user_waiting"] == $_SESSION["userid"] && $result1[$i]["id_user_dept"] == $id_friends_transaction) {
 				?> <div id="Green"><?php echo "Transaction N°"; echo '&nbsp'; echo $result1[$i]["id"];?></div><?php echo '&nbsp';
@@ -111,6 +112,8 @@ else{
                 //var_dump($result2);
                 echo "DONC:"; echo '&nbsp'; echo $result2[0]["pseudo"]; echo '&nbsp'; echo "te dois:"; echo '&nbsp';
                 ?> <div id="Green"><?php echo $result1[$i]["sum"]; echo '&nbsp'; echo "€"; echo '&nbsp';?></div><?php
+                echo "<br/>"; echo "<br/>"; echo "Date de fermeture:"; echo $result1[$i]["date_de_fermeture"];
+                echo "<br/>"; echo "Message de fermeture:"; echo $result1[$i]["message_de_fermeture"];
             } ?>
     </div><?php
         echo "<br/>";

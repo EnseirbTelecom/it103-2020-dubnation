@@ -110,7 +110,6 @@ else{
 ?>
 
 
-
 <form method="post" action="fermeture.php">
 <title> Transactions que vous voulez fermer par remboursement </title>
 <h1> Fermer des transactions </h1>
