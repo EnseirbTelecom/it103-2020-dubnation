@@ -14,6 +14,7 @@ if (!$link) {
 		die('Could not connect: ' . mysqli_error());
 }
 echo 'Connected successfully ';
+
 $pseudo_1 = $_SESSION["pseudo"];
 //echo $pseudo_1;
 $Requete = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$pseudo_1\";");
@@ -24,6 +25,11 @@ $_SESSION["userid"] = $result[0]["userid"];
 //echo $_SESSION["userid"];
 $user_con = $result[0]["userid"];
 //echo $_SESSION["userid"];
+
+$tab_solde = array (
+    array("$pseudo_1",0),
+);
+//var_dump($tab_solde);
 
 
                             ///////////////
@@ -80,6 +86,28 @@ if ($_SESSION["pseudo"]){
                     $user_check[]=$result_2[0]["pseudo"]; ?>
                     <div id="exigence"> <?php echo"Pseudo:"?> <?php echo $result_2[0]["pseudo"];echo "<br/>"; ?> </div>
                 <?php
+                    $Requete_5 = mysqli_query($link,"SELECT sum FROM Transaction_Ami WHERE id_user_dept = \"$friend\" AND id_user_waiting = \"$user_con\";");
+                    $result_5 = mysqli_fetch_all($Requete_5, MYSQLI_ASSOC);
+                    //var_dump($result_5);
+                    $Requete_7 = mysqli_query($link,"SELECT sum FROM Transaction_Ami WHERE  id_user_waiting = \"$friend\" AND id_user_dept = \"$user_con\" ;");
+                    $result_7 = mysqli_fetch_all($Requete_7, MYSQLI_ASSOC);
+                    //var_dump($result_7);
+                    $solde_amis = 0;
+                    for ($k=0; $k <sizeof($result_5) ; $k++) { 
+                        $solde_amis = $solde_amis - $result_5[$k]["sum"];
+                    }
+                    for ($k=0; $k <sizeof($result_7) ; $k++) { 
+                        $solde_amis = $solde_amis + $result_7[$k]["sum"];
+                    }
+                    echo "Solde:"; echo '&nbsp'; echo $solde_amis;
+                    $nouvelleLigne = array($result_2[0]["pseudo"],$solde_amis);
+                    $tab_solde[] = $nouvelleLigne;
+                    // $tab_solde[]=$result_2[0]["pseudo"];
+                    // $tab_solde[]=$solde_amis;
+                    // $tab_solde["friend"]=$result_2[0]["pseudo"];
+                    // $tab_solde["solde"]=$solde_amis;
+                    //var_dump($tab_solde);
+                    echo "<br/>";
                 }
                 if ($result_1[$i]["id_username_2"] == $_SESSION["userid"]) {
                     $friend_bis = $result_1[$i]["id_username_1"];
@@ -91,9 +119,28 @@ if ($_SESSION["pseudo"]){
                     $user_check[]=$result_3[0]["pseudo"];?>
                     <div id="exigence"> <?php echo"Pseudo:"?> <?php echo $result_3[0]["pseudo"];echo "<br/>"; ?> </div>
                     <?php
+                    $Requete_6 = mysqli_query($link,"SELECT sum FROM Transaction_Ami WHERE id_user_dept = \"$friend_bis\" AND id_user_waiting = \"$user_con\";");
+                    $result_6 = mysqli_fetch_all($Requete_6, MYSQLI_ASSOC);
+                    //var_dump($result_5);
+                    $Requete_8 = mysqli_query($link,"SELECT sum FROM Transaction_Ami WHERE  id_user_waiting = \"$friend_bis\" AND id_user_dept = \"$user_con\" ;");
+                    $result_8 = mysqli_fetch_all($Requete_8, MYSQLI_ASSOC);
+                    //var_dump($result_7);
+                    $solde_amis = 0;
+                    for ($k=0; $k <sizeof($result_6) ; $k++) { 
+                        $solde_amis = $solde_amis - $result_6[$k]["sum"];
+                    }
+                    for ($k=0; $k <sizeof($result_8) ; $k++) { 
+                        $solde_amis = $solde_amis + $result_8[$k]["sum"];
+                    }
+                    echo "Solde:"; echo '&nbsp'; echo $solde_amis;
+                    $nouvelleLigne = array($result_2[0]["pseudo"],$solde_amis);
+                    $tab_solde[] = $nouvelleLigne;
+                    echo "<br/>";
                 }
             }
-
+$_SESSION["tab_solde"]=$tab_solde;
+// var_dump($_SESSION["tab_solde"]);
+//echo sizeof($_SESSION["tab_solde"]);
         ?>
         </div>
 
