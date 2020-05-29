@@ -1,7 +1,7 @@
 <?php
-    $ttl = 3600; // Une heure, en secondes
-    session_set_cookie_params($ttl);
-    ini_set('session.gc_maxlifetime', $ttl);
+    // $ttl = 3600; // Une heure, en secondes
+    // session_set_cookie_params($ttl);
+    // ini_set('session.gc_maxlifetime', $ttl);
     session_start();
     include("functions.php");
 ?>
@@ -67,6 +67,7 @@ if ($_SESSION["pseudo"]){
 
     </head>
     <body>
+      <title> Carnet d'amis </title>
 
 
     <h1> Bienvenue sur ton carnet d'amis: <?php echo $_SESSION["pseudo"];?> </h1>
@@ -93,10 +94,10 @@ if ($_SESSION["pseudo"]){
                     $result_7 = mysqli_fetch_all($Requete_7, MYSQLI_ASSOC);
                     //var_dump($result_7);
                     $solde_amis = 0;
-                    for ($k=0; $k <sizeof($result_5) ; $k++) { 
+                    for ($k=0; $k <sizeof($result_5) ; $k++) {
                         $solde_amis = $solde_amis - $result_5[$k]["sum"];
                     }
-                    for ($k=0; $k <sizeof($result_7) ; $k++) { 
+                    for ($k=0; $k <sizeof($result_7) ; $k++) {
                         $solde_amis = $solde_amis + $result_7[$k]["sum"];
                     }
                     echo "Solde:"; echo '&nbsp'; echo $solde_amis;
@@ -126,10 +127,10 @@ if ($_SESSION["pseudo"]){
                     $result_8 = mysqli_fetch_all($Requete_8, MYSQLI_ASSOC);
                     //var_dump($result_7);
                     $solde_amis = 0;
-                    for ($k=0; $k <sizeof($result_6) ; $k++) { 
+                    for ($k=0; $k <sizeof($result_6) ; $k++) {
                         $solde_amis = $solde_amis - $result_6[$k]["sum"];
                     }
-                    for ($k=0; $k <sizeof($result_8) ; $k++) { 
+                    for ($k=0; $k <sizeof($result_8) ; $k++) {
                         $solde_amis = $solde_amis + $result_8[$k]["sum"];
                     }
                     echo "Solde:"; echo '&nbsp'; echo $solde_amis;

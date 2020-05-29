@@ -1,7 +1,7 @@
 <?php
-  $ttl = 3600; // Une heure, en secondes
-  session_set_cookie_params($ttl);
-  ini_set('session.gc_maxlifetime', $ttl);
+  // $ttl = 3600; // Une heure, en secondes
+  // session_set_cookie_params($ttl);
+  // ini_set('session.gc_maxlifetime', $ttl);
   include("functions.php");
   session_start();
 ?>
@@ -111,7 +111,7 @@ else{
 
 
 <form method="post" action="fermeture.php">
-<title> Transactions que vous voulez fermer par remboursement </title>
+<title> Fermez vos transactions </title>
 <h1> Fermer des transactions </h1>
 <p>
     Transaction n° :<br />

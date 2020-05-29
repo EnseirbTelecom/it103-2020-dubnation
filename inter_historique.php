@@ -1,7 +1,7 @@
 <?php
-$ttl = 3600; // Une heure, en secondes
-session_set_cookie_params($ttl);
-ini_set('session.gc_maxlifetime', $ttl);
+// $ttl = 3600; // Une heure, en secondes
+// session_set_cookie_params($ttl);
+// ini_set('session.gc_maxlifetime', $ttl);
 	include("functions.php");
     session_start();
 ?>
@@ -34,6 +34,7 @@ echo 'Connected successfully ';
 </head>
 
 <body>
+	<title> Historique de vos transactions </title>
     <h2> Consultez vos transactions avec un ami </h2>
 
     <div class="panel-body">

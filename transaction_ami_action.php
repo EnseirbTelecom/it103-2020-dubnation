@@ -1,7 +1,7 @@
 <?php
-$ttl = 3600; // Une heure, en secondes
-session_set_cookie_params($ttl);
-ini_set('session.gc_maxlifetime', $ttl);
+// $ttl = 3600; // Une heure, en secondes
+// session_set_cookie_params($ttl);
+// ini_set('session.gc_maxlifetime', $ttl);
     session_start();
     include("functions.php");
 ?>
@@ -12,6 +12,8 @@ ini_set('session.gc_maxlifetime', $ttl);
 	 <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="../it103/rest_files.css">
+  <body>
+    <title> Statut de votre transaction </title>
 <?php
 
 $link = mysqli_connect('localhost', 'admin', 'it103','Dubnation');

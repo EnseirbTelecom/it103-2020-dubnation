@@ -1,7 +1,7 @@
 <?php
-    $ttl = 3600; // Une heure, en secondes     
-    session_set_cookie_params($ttl);
-    ini_set('session.gc_maxlifetime', $ttl);
+    // $ttl = 3600; // Une heure, en secondes
+    // session_set_cookie_params($ttl);
+    // ini_set('session.gc_maxlifetime', $ttl);
     session_start();
     include("functions.php");
 ?>
@@ -23,6 +23,7 @@
 
     </head>
     <body>
+      <title> Statut de l'ajout d'ami </title>
 
 <?php
 

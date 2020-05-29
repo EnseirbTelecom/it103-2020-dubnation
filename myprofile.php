@@ -1,7 +1,7 @@
 <?php
-	$ttl = 3600; // Une heure, en secondes
-	session_set_cookie_params($ttl);
-	ini_set('session.gc_maxlifetime', $ttl);
+	// $ttl = 3600; // Une heure, en secondes
+	// session_set_cookie_params($ttl);
+	// ini_set('session.gc_maxlifetime', $ttl);
 	include("functions.php");
   session_start();
 ?>
@@ -25,6 +25,7 @@
 </head>
 
 <body>
+	<title> Votre profil </title>
 
   <div class="banner">
     <div class="row align-items-center">

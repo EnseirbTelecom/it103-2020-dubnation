@@ -1,9 +1,9 @@
 <?php
   include ("FormFermeture.php");
 //include ("functions.php");
-$ttl = 3600; // Une heure, en secondes
-session_set_cookie_params($ttl);
-ini_set('session.gc_maxlifetime', $ttl);
+// $ttl = 3600; // Une heure, en secondes
+// session_set_cookie_params($ttl);
+// ini_set('session.gc_maxlifetime', $ttl);
 session_start();
 ?>
 
@@ -22,7 +22,7 @@ if (isset($_POST["remboursement"])){
   if (isset($_POST["DateFerm"])){
     $Df=$_POST["DateFerm"];
   }
-  
+
 
   if (isset($_POST["Tr1"]) && ($_POST["Tr1"]>0)){
     $Tr1=$_POST["Tr1"];

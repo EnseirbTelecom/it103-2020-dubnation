@@ -1,7 +1,7 @@
 <?php
-$ttl = 3600; // Une heure, en secondes
-    session_set_cookie_params($ttl);
-    ini_set('session.gc_maxlifetime', $ttl);
+// $ttl = 3600; // Une heure, en secondes
+//     session_set_cookie_params($ttl);
+//     ini_set('session.gc_maxlifetime', $ttl);
 	include("functions.php");
     session_start();
 ?>
@@ -52,6 +52,7 @@ if ($_SESSION["pseudo"]){
 </head>
 
 <body>
+  <title> Historique </title>
     <h1> Voici l'historique des transactions </h1>
     <h4> Les transactions réglées sont grisées, les autres constituent le solde </h4>
 
@@ -148,7 +149,7 @@ else{
     }
     ?> <a href="modif.php"  target="_blank"> <input type="button" value="Modifier une des transactions"> </a> <?php
     }
-    $_SESSION["friends_transaction"]=$_POST["friends_transaction"];    
+    $_SESSION["friends_transaction"]=$_POST["friends_transaction"];
 ?>
 
 </body>
