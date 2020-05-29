@@ -87,7 +87,7 @@ $length=sizeof($user_check)-1;
 // echo $_POST["montant"][1];
 
 
-$friend_to_transaction = $_SESSION["utilisateur_cible"][0];
+$friend_to_transaction = $_POST["utilisateur_cible"][0];
 //echo $friend_to_transaction;
 $Requete_4 = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$friend_to_transaction\";");
 $result_4 = mysqli_fetch_all($Requete_4, MYSQLI_ASSOC);
@@ -95,21 +95,22 @@ $result_4 = mysqli_fetch_all($Requete_4, MYSQLI_ASSOC);
 //echo $result_4[0]["userid"];
 $id_friends[]=$result_4[0]["userid"];
 //var_dump($id_friends);
-
+//var_dump($_SESSION);
+//var_dump($_POST);
 for ($i=1; $i <$length ; $i++) {
-    $friend_group = $_SESSION["utilisateur_cible"][$i];
+    $friend_group = $_POST["utilisateur_cible"][$i];
+    //var_dump($friend_group);
     $Requete_5 = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$friend_group\";");
     $result_5 = mysqli_fetch_all($Requete_5, MYSQLI_ASSOC);
-    var_dump($result_5[0]["userid"]);
+    //var_dump($result_5[0]["userid"]);
     $id_friends[]=$result_5[0]["userid"];
-    
 }
 
-var_dump($id_friends);
+//var_dump($id_friends);
 
 
 for ($i=0; $i <$length ; $i++) {
-      echo $id_friends[$i];
+      //echo $id_friends[$i];
       addtransactiongroup($_SESSION["userid"], $id_friends[$i], $_POST["Statut"], $_POST["date_de_création"], $_POST["Message_Explicatif"], $_POST["date_de_fermeture"],$_POST["Message_de_fermeture"],$_POST["Montant"],$link);
 }
 ?>
