@@ -97,14 +97,16 @@ for ($i=1; $i <$length ; $i++) {
     $friend_group = $_SESSION["utilisateur_cible"][$i];
     $Requete_5 = mysqli_query($link,"SELECT userid FROM user WHERE pseudo = \"$friend_group\";");
     $result_5 = mysqli_fetch_all($Requete_5, MYSQLI_ASSOC);
+    var_dump($result_5[0]["userid"]);
     $id_friends[]=$result_5[0]["userid"];
-    //echo $id_friends[$i];
+    
 }
 
-//var_dump($id_friends);
+var_dump($id_friends);
 
 
 for ($i=0; $i <$length ; $i++) {
+      echo $id_friends[$i];
       addtransactiongroup($_SESSION["userid"], $id_friends[$i], $_POST["Statut"], $_POST["date_de_création"], $_POST["Message_Explicatif"], $_POST["date_de_fermeture"],$_POST["Message_de_fermeture"],$_POST["Montant"],$link);
 }
 ?>

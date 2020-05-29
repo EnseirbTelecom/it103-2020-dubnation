@@ -97,8 +97,8 @@ if (isset($_POST["friends_deleted"])){
         //echo $_SESSION["userid"];
         //var_dump($_SESSION["tab_solde"][2][0]);
         foreach($_SESSION["tab_solde"] as list($a,$b)) {
-            echo $a;
-            echo $b;
+            //echo $a;
+            //echo $b;
             if ($a == $friend_added){
                 if ($b != 0){
                     echo "Le solde doit être égal à 0 pour supprimer un ami";
